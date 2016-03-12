@@ -29,18 +29,13 @@ class Matches extends Component {
 
   render() {
     var matches = this.state.matches;
-    //matches = [{a: 1},{b: 1},{c: 3}];
-    matches.map(function(match) {
-      console.log(match);
-    })
-
     return (
       <div>
         <div>
 
           <h1>aaaaaa</h1>
           {matches.map(function(match) {
-            return <MatchComponent match={match} />;
+            return <MatchComponent key={match._id} match={match} />;
           })}
         </div>
       </div>
