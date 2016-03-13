@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher.js';
-import {LOGIN_USER, LOGOUT_USER} from '../constants/constants.js';
+import {LoginConstants} from '../constants/LoginConstants';
 //import RouterContainer from '../services/RouterContainer'
 
 export default {
@@ -7,7 +7,7 @@ export default {
     var savedJwt = localStorage.getItem('jwt');
 
     AppDispatcher.dispatch({
-      actionType: LOGIN_USER,
+      actionType: LoginConstants.LOGIN_USER,
       jwt: jwt
     });
 
@@ -23,9 +23,8 @@ export default {
   logoutUser: () => {
     //RouterContainer.get().transitionTo('/login');
     localStorage.removeItem('jwt');
-    console.log(LOGOUT_USER);
     AppDispatcher.dispatch({
-      actionType: LOGOUT_USER
+      actionType: LoginConstants.LOGOUT_USER
     });
   }
 }

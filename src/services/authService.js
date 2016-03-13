@@ -1,13 +1,12 @@
 import 'whatwg-fetch'
-import {LOGIN_URL} from '../constants/constants';
+import {LoginConstants} from '../constants/LoginConstants';
 import LoginActions from '../actions/LoginActions';
 
 class AuthService {
-
   login(email, password) {
     $.ajax({
       type: "POST",
-      url: 'http://localhost:3002/authenticate',
+      url: LoginConstants.LOGIN_URL,
       data: {
         email: email,
         password: password
@@ -26,7 +25,7 @@ class AuthService {
   signup(name, email, password) {
     $.ajax({
       type: "POST",
-      url: 'http://localhost:3002/register',
+      url: LoginConstants.SIGNUP_URL,
       data: {
         name: name,
         email: email,
