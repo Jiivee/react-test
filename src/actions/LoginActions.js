@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher.js';
 import {LoginConstants} from '../constants/LoginConstants';
 //import RouterContainer from '../services/RouterContainer'
+import { browserHistory, Router, Route, Link } from 'react-router'
 
 export default {
   loginUser: (jwt) => {

@@ -2,10 +2,12 @@
 import React, { Component, PropTypes } from 'react';
 import 'whatwg-fetch'
 import MatchComponent from './MatchComponent.js';
+import AuthenticatedComponent from './AuthenticatedComponent.js';
 
 const title = 'Matches';
 
-class Matches extends Component {
+
+export default AuthenticatedComponent(class Matches extends Component {
 
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ class Matches extends Component {
     return (
       <div>
         <div>
+        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
 
           <h1>aaaaaa</h1>
           {matches.map(function(match) {
@@ -42,6 +45,4 @@ class Matches extends Component {
     );
   }
 
-}
-
-export default Matches;
+});

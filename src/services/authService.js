@@ -1,6 +1,7 @@
 import 'whatwg-fetch'
 import {LoginConstants} from '../constants/LoginConstants';
 import LoginActions from '../actions/LoginActions';
+import { browserHistory, Router, Route, Link } from 'react-router';
 
 class AuthService {
   login(email, password) {
@@ -15,6 +16,7 @@ class AuthService {
         console.log(data);
         let jwt = data.token;
         LoginActions.loginUser(jwt);
+        browserHistory.push('/');
       },
       error: function(data) {
         console.log(data);
