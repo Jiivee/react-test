@@ -31,6 +31,7 @@ export default AuthenticatedComponent(class Matches extends Component {
 
   render() {
     var matches = this.state.matches;
+    console.log(matches);
     return (
       <div>
         <div>
