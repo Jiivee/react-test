@@ -35,8 +35,6 @@ class MatchComponent extends Component {
     }
     var timeFormat = hh+':'+min;
 
-    console.log(dayNames[date.getDay()]);
-
     //Scores: X if not yet set
     var homeScore, awayScore;
     if (this.props.match.score.home === null) {

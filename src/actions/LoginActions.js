@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher.js';
-import {LoginConstants} from '../constants/LoginConstants';
+import {Constants} from '../constants/Constants';
 //import RouterContainer from '../services/RouterContainer'
 import { browserHistory, Router, Route, Link } from 'react-router'
 
@@ -8,7 +8,7 @@ export default {
     var savedJwt = localStorage.getItem('jwt');
 
     AppDispatcher.dispatch({
-      actionType: LoginConstants.LOGIN_USER,
+      actionType: Constants.LOGIN_USER,
       jwt: jwt
     });
 
@@ -25,7 +25,7 @@ export default {
     //RouterContainer.get().transitionTo('/login');
     localStorage.removeItem('jwt');
     AppDispatcher.dispatch({
-      actionType: LoginConstants.LOGOUT_USER
+      actionType: Constants.LOGOUT_USER
     });
   }
 }

@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import 'whatwg-fetch'
 import MatchComponent from './MatchComponent.js';
 import AuthenticatedComponent from './AuthenticatedComponent.js';
+import {Constants} from '../constants/Constants';
 
 const title = 'Matches';
 
@@ -19,7 +20,7 @@ export default AuthenticatedComponent(class Matches extends Component {
   }
 
   fetchData() {
-    fetch('http://localhost:3002/matches')
+    fetch(Constants.MATCHES_URL)
       .then((response) => response.json())
       .then((data) => {
         this.setState({

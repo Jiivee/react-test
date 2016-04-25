@@ -46,6 +46,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "classnames": "^2.2.3",
     "flux": "^2.1.1",
     "jwt-decode": "^1.5.1",
     "react": "^0.14.6",

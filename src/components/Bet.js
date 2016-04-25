@@ -21,8 +21,6 @@ export default AuthenticatedComponent(class Bet extends Component {
   fetchData() {
     var userId = LoginStore.getUserId();
     var jwt = LoginStore.getjwt()
-    console.log(jwt);
-
     var myHeaders = new Headers({
       'x-access-token': jwt
     });

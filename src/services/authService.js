@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import {LoginConstants} from '../constants/LoginConstants';
+import {Constants} from '../constants/Constants';
 import LoginActions from '../actions/LoginActions';
 import { browserHistory, Router, Route, Link } from 'react-router';
 
@@ -7,7 +7,7 @@ class AuthService {
   login(email, password) {
     $.ajax({
       type: "POST",
-      url: LoginConstants.LOGIN_URL,
+      url: Constants.LOGIN_URL,
       data: {
         email: email,
         password: password
@@ -25,9 +25,11 @@ class AuthService {
   }
 
   signup(name, email, password) {
+    console.log('singing up');
+    console.log(Constants.SIGNUP_URL);
     $.ajax({
       type: "POST",
-      url: LoginConstants.SIGNUP_URL,
+      url: Constants.SIGNUP_URL,
       data: {
         name: name,
         email: email,
@@ -35,6 +37,7 @@ class AuthService {
       },
       success: function(data) {
         console.log(data);
+        browserHistory.push('/');
       },
       error: function(data) {
         console.log(data);
