@@ -30,6 +30,8 @@ body {
   .home-score {
     display: inline-block;
     vertical-align: middle;
+    text-align: right;
+    width: 20px;
   }
 
   .divider {
@@ -40,6 +42,8 @@ body {
   .away-score {
     display: inline-block;
     vertical-align: middle;
+    text-align: left;
+    width: 20px;
   }
 
   .away-name {

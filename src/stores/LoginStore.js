@@ -36,6 +36,14 @@ class LoginStore extends BaseStore {
     return this._jwt;
   }
 
+  getUserId() {
+    return this._user._id;
+  }
+
+  getjwt() {
+    return this._jwt;
+  }
+
   isLoggedIn() {
     return !!this._user;
   }

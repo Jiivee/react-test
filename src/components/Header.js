@@ -22,7 +22,13 @@ class Header extends Component {
 
     var loginStatus;
     if (LoginStore.isLoggedIn()) {
-      loginStatus = <input type="button" value="logout" onClick={this.logout.bind(this)}/>;
+      loginStatus = (
+        <span>
+          <Link to="/bet">Bet</Link>
+          <Link to="/tournaments">Tournaments</Link>
+          <input type="button" value="logout" onClick={this.logout.bind(this)}/>
+        </span>
+      );
     } else {
       loginStatus = (
         <span>
