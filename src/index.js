@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import App from './App';
 import Matches from './components/Matches'
 import Tournaments from './components/Tournaments'
+import Tournament from './components/Tournament'
+import NewTournament from './components/NewTournament'
 import Bet from './components/Bet'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -30,6 +32,8 @@ render((
       <Route path="matches" component={Matches} onEnter={requireAuth}/>
       <Route path="bet" component={Bet} onEnter={requireAuth}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
+        <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
+      <Route path="newtournament" component={NewTournament} onEnter={requireAuth}/>
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />
     </Route>

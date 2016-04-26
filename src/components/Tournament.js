@@ -5,10 +5,10 @@ import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory, Link } from 'react-router';
 
-const title = 'Tournaments';
+const title = 'Tournament';
 
 
-export default AuthenticatedComponent(class Tournaments extends Component {
+export default AuthenticatedComponent(class Tournament extends Component {
 
   constructor(props) {
     super(props);
@@ -20,12 +20,12 @@ export default AuthenticatedComponent(class Tournaments extends Component {
   }
 
   fetchData() {
-    var userId = LoginStore.getUserId();
+    var tournamentId = '571f6f5ef3e49a404efdab5d';
     var jwt = LoginStore.getjwt()
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    fetch(Constants.USER_URL + userId, {
+    fetch(Constants.TOURNAMENT_URL + tournamentId, {
       method: 'get',
       headers: myHeaders
     })
