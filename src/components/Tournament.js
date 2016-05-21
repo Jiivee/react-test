@@ -12,7 +12,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { tournaments: [] };
+    this.state = { tournament: {} };
   }
 
   componentWillMount() {
@@ -20,38 +20,34 @@ export default AuthenticatedComponent(class Tournament extends Component {
   }
 
   fetchData() {
-    var tournamentId = '571f6f5ef3e49a404efdab5d';
+    var tournamentId = this.props.params.tournamentId;
     var jwt = LoginStore.getjwt()
+    console.log(jwt);
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    fetch(Constants.TOURNAMENT_URL + tournamentId, {
+    var path = Constants.TOURNAMENTS_URL + 'id/' + tournamentId;
+    console.log(path);
+    fetch(path, {
       method: 'get',
       headers: myHeaders
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       this.setState({
-        tournaments: data.tournaments
+        tournament: data
       });
     })
-    .catch(e => console.log(e));
+    .catch(e => {console.log(e)});
   }
 
   render() {
-    var tournaments = this.state.tournaments;
-    console.log('tournaments:');
-    console.log(tournaments);
+    var tournament = this.state.tournament;
+    console.log('tournament:');
+    console.log(tournament);
     return (
       <div>
-        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
-        <Link to="/newtournament">Create new tournament</Link>
-        <h1>Tournaments</h1>
-        {tournaments.map(function(tournament) {
-          var url = '/tournaments/' + tournament._id;
-          return <div key={tournament._id}><Link to={url}>{tournament.name}</Link></div>;
-        })}
+        <h1>Tournament {tournament.name}</h1>
 
       </div>
     );
