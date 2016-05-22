@@ -33,6 +33,7 @@ render((
       <Route path="bet" component={Bet} onEnter={requireAuth}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
+      <Route path="tournaments/:tournamentId/makebets" component={Bet} onEnter={requireAuth}/>
       <Route path="newtournament" component={NewTournament} onEnter={requireAuth}/>
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />

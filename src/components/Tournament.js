@@ -43,11 +43,16 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
   render() {
     var tournament = this.state.tournament;
+    var tournamentId = this.props.params.tournamentId;
+    var url = '/tournaments/' + tournamentId + '/makebets/';
     console.log('tournament:');
     console.log(tournament);
     return (
       <div>
         <h1>Tournament {tournament.name}</h1>
+
+        <Link to={url}>Make bets</Link>
+
 
       </div>
     );

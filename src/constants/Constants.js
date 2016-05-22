@@ -4,6 +4,7 @@ export const Constants = {
   LOGIN_URL: BASE_URL + 'authenticate/',
   SIGNUP_URL: BASE_URL + 'register/',
   MATCHES_URL: BASE_URL + 'matches/',
+  MATCH_BETS_URL: BASE_URL + 'matchbets/',
   TOURNAMENTS_URL: BASE_URL + 'tournaments/',
   USER_URL: BASE_URL + 'users/',
   LOGIN_USER: 'LOGIN_USER',
