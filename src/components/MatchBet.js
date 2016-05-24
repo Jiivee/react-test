@@ -61,6 +61,7 @@ export default AuthenticatedComponent(class MatchBet extends Component {
 
   saveBets() {
     console.log(this.state.bets);
+    var tournamentId = this.props.params.tournamentId;
     var jwt = LoginStore.getjwt()
     $.ajax({
       type: "PUT",
@@ -72,7 +73,7 @@ export default AuthenticatedComponent(class MatchBet extends Component {
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
-        browserHistory.push('/tournaments');
+        browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff');
       },
       error: function(data) {
         console.log(data);

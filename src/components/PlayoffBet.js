@@ -15,25 +15,24 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bets: [],
-      groups: [],
-      selected16: []
+      playoffbets: [],
+      groups: []
     };
   }
 
   componentWillMount() {
     this.fetchGroups();
-    this.fetchData();
+    this.fetchPlayOffBets();
   }
 
-  fetchData() {
+  fetchPlayOffBets() {
     var userId = LoginStore.getUserId();
     var tournamentId = this.props.params.tournamentId;
     var jwt = LoginStore.getjwt()
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    var path = Constants.MATCH_BETS_URL + userId + '/' + tournamentId;
+    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId;
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -41,7 +40,7 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
     .then((response) => response.json())
     .then((data) => {
       this.setState({
-        bets: data
+        playoffbets: data
       });
     })
     .catch(e => console.log(e));
@@ -62,16 +61,13 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
   }
 
   handleChange(e) {
-    //console.log(this.state.selected16);
     var teamId = e.target.id;
-    var selected16 = this.state.selected16;
-    console.log(document.getElementById(teamId).checked);
-    if (selected16.length < 16) {
+    if (this.state.playoffbets[4].teams.length < 16) {
       if (document.getElementById(teamId).checked) {
-        this.state.selected16.push(teamId);
+        this.state.playoffbets[4].teams.push(teamId);
       }
       else {
-        this.state.selected16.splice(this.state.selected16.indexOf(teamId), 1);
+        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
       }
     }
     else {
@@ -79,10 +75,9 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
         document.getElementById(teamId).checked = false;
       }
       else {
-        this.state.selected16.splice(this.state.selected16.indexOf(teamId), 1);
+        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
       }
     }
-    console.log(this.state.selected16);
   }
 
   saveBets() {
@@ -90,11 +85,11 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
     var jwt = LoginStore.getjwt()
     $.ajax({
       type: "PUT",
-      url: Constants.MATCH_BETS_URL,
+      url: Constants.PLAYOFF_BETS_URL,
       headers: {
         'x-access-token': jwt
       },
-      data: JSON.stringify(this.state.bets),
+      data: JSON.stringify(this.state.playoffbets),
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
@@ -106,8 +101,13 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
     });
   }
 
+  isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+
   render() {
     var groups = this.state.groups;
+    console.log(this.state.playoffbets);
     return (
       <div className="make-playoff-bets">
           <h1>Playoff BETS</h1>
@@ -120,7 +120,7 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
                 {teams.map(function(team) {
                   return (
                     <span key={team._id}>
-                      <input className="bet-mark" id={team._id} name="round16" onClick={this.handleChange.bind(this)} type="checkbox"/>
+                      <input className="bet-mark" id={team._id} name="round16" defaultChecked={this.isInArray(team._id, this.state.playoffbets[4].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
                       <label htmlFor={team._id}>{team.name}</label>
                     </span>
                   );
@@ -128,6 +128,7 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
               </div>
             );
           }, this)}
+          <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
       </div>
     );
   }

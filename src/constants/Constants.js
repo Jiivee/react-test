@@ -7,6 +7,7 @@ export const Constants = {
   GROUPS_URL: BASE_URL + 'groups/',
   MATCHES_URL: BASE_URL + 'matches/',
   MATCH_BETS_URL: BASE_URL + 'matchbets/',
+  PLAYOFF_BETS_URL: BASE_URL + 'playoffbets/playoff/',
   TOURNAMENTS_URL: BASE_URL + 'tournaments/',
   USER_URL: BASE_URL + 'users/',
   LOGIN_USER: 'LOGIN_USER',
