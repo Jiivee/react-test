@@ -6,7 +6,8 @@ import Tournaments from './components/Tournaments'
 import Tournament from './components/Tournament'
 import NewTournament from './components/NewTournament'
 import MatchBet from './components/MatchBet'
-import PlayoffBet from './components/PlayoffBet'
+import PlayoffBet16 from './components/PlayoffBet16'
+import PlayoffBet8 from './components/PlayoffBet8'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import LoginStore from './stores/LoginStore'
@@ -34,7 +35,8 @@ render((
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId/makebets/match" component={MatchBet} onEnter={requireAuth}/>
-      <Route path="tournaments/:tournamentId/makebets/playoff" component={PlayoffBet} onEnter={requireAuth}/>
+      <Route path="tournaments/:tournamentId/makebets/playoff" component={PlayoffBet16} onEnter={requireAuth}/>
+      <Route path="tournaments/:tournamentId/makebets/playoff/8" component={PlayoffBet8} onEnter={requireAuth}/>
       <Route path="newtournament" component={NewTournament} onEnter={requireAuth}/>
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />
