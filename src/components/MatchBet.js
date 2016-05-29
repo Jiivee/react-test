@@ -60,7 +60,6 @@ export default AuthenticatedComponent(class MatchBet extends Component {
   }
 
   saveBets() {
-    console.log(this.state.bets);
     var tournamentId = this.props.params.tournamentId;
     var jwt = LoginStore.getjwt()
     $.ajax({
