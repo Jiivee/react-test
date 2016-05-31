@@ -15,22 +15,25 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playoffbets: []
+      playoffbets: [],
+      chosenTeams: []
     };
   }
 
   componentWillMount() {
-    this.fetchPlayOffBets();
+    var selectNumberTeams = this.props.selectNumberTeams;
+    this.fetchChosenTeams(selectNumberTeams*2);
+    this.fetchPlayOffBets(selectNumberTeams);
   }
 
-  fetchPlayOffBets() {
+  fetchPlayOffBets(number_of_teams) {
     var userId = LoginStore.getUserId();
     var tournamentId = this.props.tournamentId;
     var jwt = LoginStore.getjwt()
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId;
+    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId + '/' + number_of_teams + '/team-ids';
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -44,15 +47,35 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
     .catch(e => console.log(e));
   }
 
+  fetchChosenTeams(number_of_teams) {
+    var userId = LoginStore.getUserId();
+    var tournamentId = this.props.tournamentId;
+    var jwt = LoginStore.getjwt()
+    var myHeaders = new Headers({
+      'x-access-token': jwt
+    });
+    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId + '/' + number_of_teams;
+    fetch(path, {
+      method: 'get',
+      headers: myHeaders
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        chosenTeams: data
+      });
+    })
+    .catch(e => console.log(e));
+  }
+
   handleChange(e) {
-    var playoffid = Math.log2(this.props.selectNumberTeams);
     var teamId = e.target.id;
-    if (this.state.playoffbets[playoffid].teams.length < this.props.selectNumberTeams) {
+    if (this.state.playoffbets[0].teams.length < this.props.selectNumberTeams) {
       if (document.getElementById(teamId).checked) {
-        this.state.playoffbets[playoffid].teams.push(teamId);
+        this.state.playoffbets[0].teams.push(teamId);
       }
       else {
-        this.state.playoffbets[playoffid].teams.splice(this.state.playoffbets[playoffid].teams.indexOf(teamId), 1);
+        this.state.playoffbets[0].teams.splice(this.state.playoffbets[0].teams.indexOf(teamId), 1);
       }
     }
     else {
@@ -60,7 +83,7 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
         document.getElementById(teamId).checked = false;
       }
       else {
-        this.state.playoffbets[playoffid].teams.splice(this.state.playoffbets[playoffid].teams.indexOf(teamId), 1);
+        this.state.playoffbets[0].teams.splice(this.state.playoffbets[0].teams.indexOf(teamId), 1);
       }
     }
   }
@@ -68,6 +91,8 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
   saveBets() {
     console.log(this.state.bets);
     var jwt = LoginStore.getjwt()
+    var next = this.props.selectNumberTeams/2;
+    var tournamentId = this.props.tournamentId;
     $.ajax({
       type: "PUT",
       url: Constants.PLAYOFF_BETS_URL,
@@ -78,7 +103,12 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
-        browserHistory.push('/tournaments');
+        if (next === 1/2) {
+          browserHistory.push('/tournaments/' + tournamentId);
+        }
+        else {
+          browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff/' + next);
+        }
       },
       error: function(data) {
         console.log(data);
@@ -93,21 +123,30 @@ export default AuthenticatedComponent(class PlayoffBetOther extends Component {
   render() {
     var playoffid = this.props.selectNumberTeams;
     console.log(this.state);
-    var teamsToSelect = this.state.playoffbets[playoffid*2].teams;
+    var chosenTeams = this.state.chosenTeams;
+    //var teamsToSelect = playoffbets.teams;
+    //console.log(teamsToSelect);
     return (
       <div className="make-playoff-bets">
-          <h1>Playoff BETS</h1>
-          <div>{this.props.description}</div>
-          {teamsToSelect.map(function(team) {
-            var teams = group.teams;
+        <h1>Playoff BETS</h1>
+        <div>{this.props.description}</div>
+        {chosenTeams.map(function(chosen) {
+            var teams = chosen.teams;
+            console.log(teams);
             return (
-              <span key={team}>
-                <input className="bet-mark" id={team} name="round16" defaultChecked={this.isInArray(team, this.state.playoffbets[playoffid].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
-                <label htmlFor={team}>{team}</label>
-              </span>
+              <div key={chosen._id}>
+              {teams.map(function(team) {
+                return (
+                  <span key={team._id}>
+                    <input className="bet-mark" id={team._id} name="roundx" defaultChecked={this.isInArray(team._id, this.state.playoffbets[0].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
+                    <label htmlFor={team._id}>{team.name}</label>
+                  </span>
+                );
+              }, this)}
+              <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+              </div>
             );
-          }, this)}
-          <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+        }, this)}
       </div>
     );
   }

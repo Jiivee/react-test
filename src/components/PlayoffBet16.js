@@ -32,7 +32,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId;
+    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId + '/16/team-ids';
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -62,12 +62,12 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
 
   handleChange(e) {
     var teamId = e.target.id;
-    if (this.state.playoffbets[4].teams.length < 16) {
+    if (this.state.playoffbets[0].teams.length < 16) {
       if (document.getElementById(teamId).checked) {
-        this.state.playoffbets[4].teams.push(teamId);
+        this.state.playoffbets[0].teams.push(teamId);
       }
       else {
-        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
+        this.state.playoffbets[0].teams.splice(this.state.playoffbets[0].teams.indexOf(teamId), 1);
       }
     }
     else {
@@ -75,7 +75,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
         document.getElementById(teamId).checked = false;
       }
       else {
-        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
+        this.state.playoffbets[0].teams.splice(this.state.playoffbets[0].teams.indexOf(teamId), 1);
       }
     }
   }
@@ -83,6 +83,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
   saveBets() {
     console.log(this.state.bets);
     var jwt = LoginStore.getjwt()
+    var tournamentId = this.props.params.tournamentId;
     $.ajax({
       type: "PUT",
       url: Constants.PLAYOFF_BETS_URL,
@@ -93,7 +94,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
-        browserHistory.push('/tournaments');
+        browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff/8');
       },
       error: function(data) {
         console.log(data);
@@ -107,7 +108,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
 
   render() {
     var groups = this.state.groups;
-    console.log(this.state.playoffbets);
+    console.log(this.state.playoffbets[0]);
     return (
       <div className="make-playoff-bets">
           <h1>Playoff BETS</h1>
@@ -120,7 +121,7 @@ export default AuthenticatedComponent(class PlayoffBet16 extends Component {
                 {teams.map(function(team) {
                   return (
                     <span key={team._id}>
-                      <input className="bet-mark" id={team._id} name="round16" defaultChecked={this.isInArray(team._id, this.state.playoffbets[4].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
+                      <input className="bet-mark" id={team._id} name="round16" defaultChecked={this.isInArray(team._id, this.state.playoffbets[0].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
                       <label htmlFor={team._id}>{team.name}</label>
                     </span>
                   );
