@@ -72,7 +72,7 @@ export default AuthenticatedComponent(class MatchBet extends Component {
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
-        browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff/16');
+        browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff/');
       },
       error: function(data) {
         console.log(data);
