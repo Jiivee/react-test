@@ -1,49 +1,48 @@
-/*
-const path = require('path')
-const webpack = require('webpack')
+var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
-  devtool: 'source-map',
-
   entry: [
     './src/index'
   ],
-
-  output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/public/'
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['react-hot', 'babel'],
+      include: path.join(__dirname, 'src')
+    },{
+      test: /\.(png|woff|woff2|eot|ttf|svg|json)$/,
+      loader: 'file-loader'
+    },{
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+    }]
   },
-
+  resolve: {
+    extensions: ['', '.js']
+  },
+  output: {
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
       compress: {
         warnings: false
       }
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
     })
-  ],
-
-  module: {
-    loaders: [
-      { test: /\.js?$/,
-        loader: 'babel',
-        exclude: /node_modules/ },
-      {
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-      },
-      { test: /\.png$/,
-        loader: 'file' },
-      { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file'}
-    ]
-  }
-}
-*/
+  ]
+};
