@@ -1,48 +1,20 @@
+var config = require('./webpack.config.js');
 var webpack = require('webpack');
-var path = require('path');
 
-module.exports = {
-  entry: [
-    './src/index'
-  ],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'src')
-    },{
-      test: /\.(png|woff|woff2|eot|ttf|svg|json)$/,
-      loader: 'file-loader'
-    },{
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js']
-  },
-  output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify("production")
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
-};
+config.plugins.push(
+  new webpack.DefinePlugin({
+    "process.env": {
+      "NODE_ENV": JSON.stringify("production")
+    }
+  })
+);
+
+config.plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  })
+);
+
+module.exports = config;
