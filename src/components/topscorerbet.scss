@@ -1,0 +1,45 @@
+.make-topscorer-bets {
+  .match-bet-container {
+    border-bottom: 1px solid black;
+    padding: 5px;
+  }
+
+  input[type=radio] {
+    display:none;
+    margin:10px;
+  }
+
+  input[type=radio] + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
+    -webkit-box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
+    box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
+    display:inline-block;
+    background-color: rgb(198, 242, 149);
+    border: 1px solid rgb(161,234,81);
+    height: 25px;
+    width: 100px;
+    text-align: center;
+    padding-top: 2px;
+    margin-bottom: 3px;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input[type=radio]:checked + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
+    -webkit-box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
+    box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
+    background-color: rgb(119,212,42);
+    border:1px solid rgb(44,160,26);
+    font-weight:bold;
+    font-style:normal;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #aade7c;
+  }
+
+}
+
+

@@ -7,10 +7,9 @@ import Tournament from './components/Tournament'
 import NewTournament from './components/NewTournament'
 import MatchBet from './components/MatchBet'
 import PlayoffBet from './components/PlayoffBet'
-import PlayoffBet8 from './components/PlayoffBet8'
-import PlayoffBet4 from './components/PlayoffBet4'
-import PlayoffBet2 from './components/PlayoffBet2'
-import PlayoffBet1 from './components/PlayoffBet1'
+import TopScorerBet from './components/TopScorerBet'
+import SetMatchResult from './components/SetMatchResult'
+import ResultPage from './components/ResultPage'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import LoginStore from './stores/LoginStore'
@@ -35,14 +34,13 @@ render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="matches" component={Matches} onEnter={requireAuth}/>
+      <Route path="matches/:matchId/setresult" component={SetMatchResult} onEnter={requireAuth}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId/makebets/match" component={MatchBet} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId/makebets/playoff" component={PlayoffBet} onEnter={requireAuth}/>
-      <Route path="tournaments/:tournamentId/makebets/playoff/8" component={PlayoffBet8} onEnter={requireAuth}/>
-      <Route path="tournaments/:tournamentId/makebets/playoff/4" component={PlayoffBet4} onEnter={requireAuth}/>
-      <Route path="tournaments/:tournamentId/makebets/playoff/2" component={PlayoffBet2} onEnter={requireAuth}/>
-      <Route path="tournaments/:tournamentId/makebets/playoff/1" component={PlayoffBet1} onEnter={requireAuth}/>
+      <Route path="tournaments/:tournamentId/makebets/topscorer" component={TopScorerBet} onEnter={requireAuth}/>
+      <Route path="tournaments/:tournamentId/results/:userId" component={ResultPage} onEnter={requireAuth}/>
       <Route path="newtournament" component={NewTournament} onEnter={requireAuth}/>
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />

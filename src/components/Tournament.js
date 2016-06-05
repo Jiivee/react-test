@@ -111,10 +111,13 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
         <div>Points</div>
         {points.map(function(point) {
+          var urlResults;
+          var userId = point.user._id;
+          var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
           return (
             <div key={point._id}>
-              <span>{point.user.name} </span>
-              <span>{point.points}</span>
+              <span><Link to={urlResults}>{point.user.name}</Link></span>
+              <span>{point.match_points}</span>
             </div>
           );
         })}

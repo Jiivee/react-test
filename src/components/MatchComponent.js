@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { browserHistory, Router, Route, Link } from 'react-router';
 
 class MatchComponent extends Component {
 
@@ -46,8 +47,12 @@ class MatchComponent extends Component {
       awayScore = this.props.match.score.away;
     }
 
+    var id = this.props.match._id;
+    var setResultRoute = '/matches/' + id + '/setresult';
+
     return (
       <div className="match">
+        <Link to={setResultRoute}>
         <span className="time">{dayName} {dateFormat} {timeFormat}</span>
         <span className="group">{this.props.match.group.name}</span>
         <span className={homeClasses}></span>
@@ -57,6 +62,7 @@ class MatchComponent extends Component {
         <span className="away-score">{awayScore}</span>
         <span className="away-name">{this.props.match.away_team.name}</span>
         <span className={awayClasses}></span>
+        </Link>
       </div>
     );
   }

@@ -63,14 +63,14 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
   handleChange(e) {
     var targetId = e.target.id;
     var teamId = targetId.split('-')[1];
-    console.log(teamId);
-    if (this.state.playoffbets[4].teams.length < 16) {
-      console.log('under');
+    var index = e.target.name.split('-')[1];
+    var numberOfTeams = Math.pow(2, Math.abs(index-4));
+    if (this.state.playoffbets[index].teams.length < numberOfTeams) {
       if (document.getElementById(targetId).checked) {
-        this.state.playoffbets[4].teams.push(teamId);
+        this.state.playoffbets[index].teams.push(teamId);
       }
       else {
-        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
+        this.state.playoffbets[index].teams.splice(this.state.playoffbets[index].teams.indexOf(teamId), 1);
       }
     }
     else {
@@ -78,14 +78,12 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
         document.getElementById(targetId).checked = false;
       }
       else {
-        this.state.playoffbets[4].teams.splice(this.state.playoffbets[4].teams.indexOf(teamId), 1);
+        this.state.playoffbets[index].teams.splice(this.state.playoffbets[index].teams.indexOf(teamId), 1);
       }
     }
-    console.log(this.state.playoffbets[4].teams);
   }
 
   saveBets() {
-    console.log(this.state.bets);
     var jwt = LoginStore.getjwt()
     var tournamentId = this.props.params.tournamentId;
     $.ajax({
@@ -98,7 +96,7 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
       contentType: "application/json; charset=utf-8",
       dataType: "text",
       success: function(data) {
-        browserHistory.push('/tournaments/' + tournamentId + '/makebets/playoff/8');
+        browserHistory.push('/tournaments/' + tournamentId + '/makebets/topscorer/');
       },
       error: function(data) {
         console.log(data);
@@ -113,30 +111,43 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
   render() {
     var groups = this.state.groups;
     var playoffbets = this.state.playoffbets;
-    console.log('render');
-    console.log(this.state.playoffbets);
     return (
       <div className="make-playoff-bets">
           <h1>Playoff BETS</h1>
-          <div>Select 16 countries for round of 16</div>
-          {groups.map(function(group) {
-            var teams = group.teams;
-            var groupKey = '16-' + group.name;
+          {playoffbets.map(function(bets, index) {
+            var betsKey = index + '-bets';
+            var text = [];
+            text[0] = 'Select 16 countries for round of 16';
+            text[1] = 'Select 8 countries for quarter finals';
+            text[2] = 'Select 4 countries for semi finals';
+            text[3] = 'Select 2 finalists';
+            text[4] = 'Select winner';
             return (
-              <div key={groupKey}>
-                <span>Group {group.name}</span>
-                {teams.map(function(team) {
-                  var teamKey = '16-' + team._id;
+              <div key={betsKey}>
+                <div>{text[index]}</div>
+                {groups.map(function(group) {
+                  var teams = group.teams;
+                  var groupKey = index + '-' + group.name;
                   return (
-                    <span key={team._id}>
-                      <input className="bet-mark" id={teamKey} name="round-16" defaultChecked={this.isInArray(team._id, this.state.playoffbets[4].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
-                      <label htmlFor={teamKey}>{team.name}</label>
-                    </span>
+                    <div key={groupKey}>
+                      <span>Group {group.name}</span>
+                      {teams.map(function(team) {
+                        var teamKey = index + '-' + team._id;
+                        var roundName = 'round-' + index;
+                        return (
+                          <span key={team._id}>
+                            <input className="bet-mark" id={teamKey} name={roundName} defaultChecked={this.isInArray(team._id, this.state.playoffbets[index].teams)} onChange={this.handleChange.bind(this)} type="checkbox"/>
+                            <label htmlFor={teamKey}>{team.name}</label>
+                          </span>
+                        );
+                      }, this)}
+                    </div>
                   );
                 }, this)}
               </div>
             );
           }, this)}
+
           <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
       </div>
     );
