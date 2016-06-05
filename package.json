@@ -9,8 +9,8 @@
   "author": "Joni Väyrynen",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
-    "start": "node ./app.js"
+    "start": "node app.js",
+    "postinstall": "webpack -p --config webpack.prod.config.js"
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
