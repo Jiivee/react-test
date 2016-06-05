@@ -1,32 +1,17 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "euro-2016-betting",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "euro-2016-betting",
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Joni Väyrynen",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "webpack -p --config webpack.prod.config.js"
   },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.3",
@@ -43,9 +28,13 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "webpack": "^1.12.14",
+    "express": "^4.13.4",
     "classnames": "^2.2.3",
     "flux": "^2.1.1",
     "jwt-decode": "^1.5.1",
