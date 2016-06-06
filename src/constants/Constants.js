@@ -1,4 +1,4 @@
-var BASE_URL = 'https://euro2016veikkaus.herokuapp.com//';
+var BASE_URL = 'https://euro2016veikkaus.herokuapp.com/';
 export const Constants = {
   BASE_URL: BASE_URL,
   LOGIN_URL: BASE_URL + 'authenticate/',
