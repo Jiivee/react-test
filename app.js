@@ -67,6 +67,10 @@ app.get('/signup', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
 
+app.get('/newuser/:jwt', function(request, response) {
+  response.sendFile(__dirname + '/dist/index.html')
+});
+
 app.listen(PORT, function(error) {
   if (error) {
     console.error(error);

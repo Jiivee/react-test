@@ -1,7 +1,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import 'whatwg-fetch'
-import MatchComponent from './MatchComponent.js';
+import ResultComponent from './ResultComponent.js';
 import AuthenticatedComponent from './AuthenticatedComponent.js';
 import {Constants} from '../constants/Constants';
 import LoginStore from '../stores/LoginStore'
@@ -27,7 +27,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    var path = Constants.MATCH_BETS_URL + tournamentId + '/' + userId;
+    var path = Constants.MATCH_BETS_URL + userId + '/' + tournamentId;
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -51,7 +51,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
 
           <h1>aaaaaa</h1>
           {matchbets.map(function(matchbet) {
-            return <MatchbetComponent key={matchbet._id} matchbet={matchbet} />;
+            return <ResultComponent key={matchbet._id} matchbet={matchbet} />;
           })}
         </div>
       </div>

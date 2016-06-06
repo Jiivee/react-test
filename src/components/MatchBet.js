@@ -24,7 +24,7 @@ export default AuthenticatedComponent(class MatchBet extends Component {
   fetchData() {
     var userId = LoginStore.getUserId();
     var tournamentId = this.props.params.tournamentId;
-    var jwt = LoginStore.getjwt()
+    var jwt = LoginStore.getjwt();
     var myHeaders = new Headers({
       'x-access-token': jwt
     });

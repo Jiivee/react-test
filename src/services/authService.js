@@ -45,6 +45,27 @@ class AuthService {
     });
   }
 
+  newuser(email, name, password) {
+    console.log('new user');
+    console.log(Constants.NEW_USER_URL);
+    $.ajax({
+      type: "POST",
+      url: Constants.NEW_USER_URL,
+      data: {
+        name: name,
+        email: email,
+        password: password
+      },
+      success: function(data) {
+        console.log(data);
+        browserHistory.push('/login');
+      },
+      error: function(data) {
+        console.log(data);
+      }
+    });
+  }
+
   logout() {
     LoginActions.logoutUser();
   }

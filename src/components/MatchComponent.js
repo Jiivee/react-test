@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { browserHistory, Router, Route, Link } from 'react-router';
+import LoginStore from '../stores/LoginStore'
 
 class MatchComponent extends Component {
 
@@ -50,9 +51,17 @@ class MatchComponent extends Component {
     var id = this.props.match._id;
     var setResultRoute = '/matches/' + id + '/setresult';
 
+    var user = LoginStore.getUser();
+    console.log(user);
+
+    var link = '';
+    if (user.email==='joni.vayrynen@gmail.com') {
+        link = <Link to={setResultRoute}>EDIT</Link>;
+    }
+
     return (
       <div className="match">
-        <Link to={setResultRoute}>
+        {link}
         <span className="time">{dayName} {dateFormat} {timeFormat}</span>
         <span className="group">{this.props.match.group.name}</span>
         <span className={homeClasses}></span>
@@ -62,7 +71,6 @@ class MatchComponent extends Component {
         <span className="away-score">{awayScore}</span>
         <span className="away-name">{this.props.match.away_team.name}</span>
         <span className={awayClasses}></span>
-        </Link>
       </div>
     );
   }
