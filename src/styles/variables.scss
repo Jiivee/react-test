@@ -1,0 +1,12 @@
+$base-color: #4CAF50;
+$darker-base-color: darken($base-color, 8%);
+$darkest-base-color: darken($base-color, 15%);
+$lighter-base-color: lighten($base-color, 15%);
+
+$white-background: #FFF;
+
+$black: #000;
+$text-color: lighten($black, 13%);
+
+$unselect-color: #C8F0B4;
+$select-color: #64BE37;

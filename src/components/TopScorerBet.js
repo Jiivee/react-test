@@ -5,7 +5,7 @@ import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory } from 'react-router'
 
-import styles from './topscorerbet.scss';
+import styles from '../styles/topscorerbet.scss';
 
 const title = 'Top Scorer Bet';
 

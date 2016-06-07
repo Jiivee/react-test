@@ -1,7 +1,18 @@
+@import "variables";
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
+  background-color: $base-color;
 }
+
+.centerer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: $white-background;
+}
+
 
 .match {
   height: 28px;

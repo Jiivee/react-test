@@ -3,7 +3,7 @@ import LoginStore from '../stores/LoginStore';
 import auth from '../services/AuthService';
 import { browserHistory, Router, Route, Link } from 'react-router';
 
-import styles from './header.scss';
+import styles from '../styles/header.scss';
 
 class Header extends Component {
 

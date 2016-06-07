@@ -1,0 +1,72 @@
+@import "variables";
+
+.playoff-playoff-bets {
+  .playoff-bet-container {
+    border-bottom: 10px solid $base-color;
+    padding: 10px;
+
+    .section-header {
+      padding: 5px 0 10px 0;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .group-name {
+      display: inline-block;
+      width: 80px;
+      font-weight: bold;
+    }
+  }
+
+  .save-bets-container {
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .save-bets-button {
+      padding: 7px;
+      font-size: 16px;
+      background-color: $darkest-base-color;
+      color: #FFF;
+      font-weight: bold;
+      border: 0;
+    }
+  }
+
+  input[type=checkbox] {
+    display:none;
+    margin:10px;
+  }
+
+  input[type=checkbox] + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    display:inline-block;
+    background-color: $unselect-color;
+    border: 1px solid darken($unselect-color, 15%);
+    height: 25px;
+    width: 150px;
+    text-align: center;
+    padding-top: 2px;
+    margin: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input[type=checkbox]:checked + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
+    font-weight:bold;
+    font-style:normal;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #aade7c;
+  }
+
+}
+
+

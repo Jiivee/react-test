@@ -1,0 +1,91 @@
+@import "variables";
+
+.make-match-bets {
+  .match-bet-container {
+    border-bottom: 10px solid $base-color;
+    padding: 10px;
+
+    .team-name {
+      width: 120px;
+      font-weight: bold;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+
+    .goals-container {
+      display: inline-block;
+      padding-left: 10px;
+
+      .goals-row {
+        padding: 8px 0 8px 0;
+      }
+    }
+
+
+    .mark-container {
+      display: inline-block;
+      position: absolute;
+      padding-left: 20px;
+    }
+
+  }
+
+  .save-bets-container {
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .save-bets-button {
+      padding: 7px;
+      font-size: 16px;
+      background-color: $darkest-base-color;
+      color: #FFF;
+      font-weight: bold;
+      border: 0;
+    }
+  }
+
+
+  input[type=radio] {
+    display:none;
+    margin:10px;
+    padding: 10px;
+  }
+
+  input[type=radio] + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    display:inline-block;
+    background-color: $unselect-color;
+    border: 1px solid darken($unselect-color, 15%);
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    padding-top: 2px;
+    margin: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input[type=radio]:checked + label {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
+    font-weight:bold;
+    font-style:normal;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #aade7c;
+  }
+
+}
+
+/*
+119,212,42
+100,190,55
+76,175,80
+*/

@@ -5,7 +5,7 @@ import Footer from './components/Footer.js';
 import LoginActions from './actions/LoginActions';
 import LoginStore from './stores/LoginStore';
 
-import styles from './components/main.scss';
+import styles from './styles/main.scss';
 
 export default class App extends Component {
 
@@ -17,9 +17,11 @@ export default class App extends Component {
 
     return (
       <div>
-      <Header/>
-      {this.props.children}
-      <Footer/>
+        <Header/>
+        <div className="centerer">
+        {this.props.children}
+        </div>
+        <Footer/>
       </div>
     );
   }

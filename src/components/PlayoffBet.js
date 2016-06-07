@@ -5,7 +5,7 @@ import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory } from 'react-router'
 
-import styles from './playoffbet.scss';
+import styles from '../styles/playoffbet.scss';
 
 const title = 'Playoff Bet';
 
@@ -112,8 +112,10 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
     var groups = this.state.groups;
     var playoffbets = this.state.playoffbets;
     return (
-      <div className="make-playoff-bets">
-          <h1>Playoff BETS</h1>
+      <div className="playoff-playoff-bets">
+        <div className="playoff-bet-container">
+          <h2>Knockout stage bets</h2>
+        </div>
           {playoffbets.map(function(bets, index) {
             var betsKey = index + '-bets';
             var text = [];
@@ -123,14 +125,14 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
             text[3] = 'Select 2 finalists';
             text[4] = 'Select winner';
             return (
-              <div key={betsKey}>
-                <div>{text[index]}</div>
+              <div className="playoff-bet-container" key={betsKey}>
+                <div className="section-header">{text[index]}</div>
                 {groups.map(function(group) {
                   var teams = group.teams;
                   var groupKey = index + '-' + group.name;
                   return (
                     <div key={groupKey}>
-                      <span>Group {group.name}</span>
+                      <span className="group-name">Group {group.name}</span>
                       {teams.map(function(team) {
                         var teamKey = index + '-' + team._id;
                         var roundName = 'round-' + index;
@@ -148,7 +150,9 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
             );
           }, this)}
 
-          <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+        <div className="save-bets-container">
+          <input className="save-bets-button" type="button" onClick={this.saveBets.bind(this)} value="Continue"/>
+        </div>
       </div>
     );
   }

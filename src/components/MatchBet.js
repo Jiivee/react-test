@@ -5,7 +5,7 @@ import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory } from 'react-router'
 
-import styles from './matchbet.scss';
+import styles from '../styles/matchbet.scss';
 
 const title = 'Match Bet';
 
@@ -82,8 +82,7 @@ export default AuthenticatedComponent(class MatchBet extends Component {
 
   render() {
     var bets = this.state.bets;
-    console.log(this.state.bets[0]);
-    console.log(this);
+    console.log(bets);
     var goalBets = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     var markBets = ['1', 'X', '2'];
 
@@ -92,50 +91,52 @@ export default AuthenticatedComponent(class MatchBet extends Component {
       var matchBetKey = 'bet-' + matchNumber;
       return (
         <div key={matchBetKey} className="match-bet-container">
-          <div>
-            <span key={bet.match.home_team._id}>{bet.match.home_team.name}</span>
-            {goalBets.map(function(goalNumber) {
-              var betGoalsRadioName = 'bet-home-' + matchNumber;
-              var betGoalId = 'bet-home-' + matchNumber + '-' + goalNumber;
+          <div className="goals-container">
+            <div className="goals-row">
+              <span className="team-name" key={bet.match.home_team._id}>{bet.match.home_team.name}</span>
+              {goalBets.map(function(goalNumber) {
+                var betGoalsRadioName = 'bet-home-' + matchNumber;
+                var betGoalId = 'bet-home-' + matchNumber + '-' + goalNumber;
 
-              return (
-                <span key={betGoalId}>
-                  <input className="bet-number-of-goals" id={betGoalId} name={betGoalsRadioName} defaultChecked={bet.score.home === goalNumber} onChange={this.handleChange.bind(this)} type="radio"/>
-                  {
-                    goalNumber === 8
-                    ? <label htmlFor={betGoalId}>+</label>
-                    : <label htmlFor={betGoalId}>{goalNumber}</label>
-                  }
-                </span>
-              );
-            }, this)}
+                return (
+                  <span key={betGoalId}>
+                    <input className="bet-number-of-goals" id={betGoalId} name={betGoalsRadioName} defaultChecked={bet.score.home === goalNumber} onChange={this.handleChange.bind(this)} type="radio"/>
+                    {
+                      goalNumber === 8
+                      ? <label htmlFor={betGoalId}>+</label>
+                      : <label htmlFor={betGoalId}>{goalNumber}</label>
+                    }
+                  </span>
+                );
+              }, this)}
+            </div>
+            <div className="goals-row">
+              <span className="team-name" key={bet.match.away_team._id}>{bet.match.away_team.name}</span>
+              {goalBets.map(function(goalNumber) {
+                var betGoalsRadioName = 'bet-away-' + matchNumber;
+                var betGoalId = 'bet-away-' + matchNumber + '-' + goalNumber;
+                return (
+                  <span key={betGoalId}>
+                    <input className="bet-number-of-goals" id={betGoalId} name={betGoalsRadioName} defaultChecked={bet.score.away === goalNumber} onChange={this.handleChange.bind(this)} type="radio"/>
+                    {
+                      goalNumber === 8
+                      ? <label htmlFor={betGoalId}>+</label>
+                      : <label htmlFor={betGoalId}>{goalNumber}</label>
+                    }
+                  </span>
+                );
+              }, this)}
+            </div>
           </div>
-          <div>
-            <span key={bet.match.away_team._id}>{bet.match.away_team.name}</span>
-            {goalBets.map(function(goalNumber) {
-              var betGoalsRadioName = 'bet-away-' + matchNumber;
-              var betGoalId = 'bet-away-' + matchNumber + '-' + goalNumber;
-              return (
-                <span key={betGoalId}>
-                  <input className="bet-number-of-goals" id={betGoalId} name={betGoalsRadioName} defaultChecked={bet.score.away === goalNumber} onChange={this.handleChange.bind(this)} type="radio"/>
-                  {
-                    goalNumber === 8
-                    ? <label htmlFor={betGoalId}>+</label>
-                    : <label htmlFor={betGoalId}>{goalNumber}</label>
-                  }
-                </span>
-              );
-            }, this)}
-          </div>
-          <div>
+          <div className="mark-container">
             {markBets.map(function(mark) {
               var betMarkRadioName = 'bet-mark-' + matchNumber;
               var betMarkId = 'bet-mark-' + matchNumber + '-' + mark;
               return (
-                <span key={betMarkId}>
+                <div key={betMarkId}>
                   <input className="bet-mark" id={betMarkId} name={betMarkRadioName} defaultChecked={bet.mark === mark} onChange={this.handleChange.bind(this)} type="radio"/>
                   <label htmlFor={betMarkId}>{mark}</label>
-                </span>
+                </div>
               );
             }, this)}
           </div>
@@ -147,9 +148,16 @@ export default AuthenticatedComponent(class MatchBet extends Component {
 
     return (
       <div className="make-match-bets">
-          <h1>BETS</h1>
-          {betRows}
-          <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+        <div className="match-bet-container">
+          <h2>Group stage bets</h2>
+          <div>
+
+          </div>
+        </div>
+        {betRows}
+        <div className="save-bets-container">
+          <input className="save-bets-button" type="button" onClick={this.saveBets.bind(this)} value="Continue"/>
+        </div>
       </div>
     );
   }
