@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom'
 import App from './App';
 import Matches from './components/Matches'
+import Rules from './components/Rules'
 import Tournaments from './components/Tournaments'
 import Tournament from './components/Tournament'
 import NewTournament from './components/NewTournament'
@@ -33,8 +34,9 @@ function requireAuth(nextState, replace) {
 
 render((
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="matches" component={Matches} onEnter={requireAuth}/>
+    <Route component={App}>
+      <Route path="/" component={Matches}/>
+      <Route path="/rules" component={Rules}/>
       <Route path="matches/:matchId/setresult" component={SetMatchResult} onEnter={requireAuth}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>

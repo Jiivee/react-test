@@ -118,32 +118,46 @@ export default AuthenticatedComponent(class TopScorerBet extends Component {
     var goals = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     return (
       <div className="make-topscorer-bets">
-        <div>
-          <div>Select team of top scorer:</div>
-          {teams.map(function(team, index) {
-            var id = team._id + '-' + index;
-            return (
-              <span key={team._id}>
-                <input id={id} name='team' onChange={this.handleTeamChange.bind(this)} type="radio"/>
-                <label htmlFor={id}>{team.name}</label>
-              </span>
-            );
-          }, this)}
+        <div className="topscorer-bet-container">
+          <h2>Top scorer bet</h2>
+          <div>
+            <p>Select first the team of the top scorer. After selecting the team, you can select the player you think will be the top scorer. If two players have scored same amount of goals, the one with most assists will be the winner. If also the amount of assists is same, then the player with least minutes played in the tournament will be the winner.</p>
+            <p>Select also the amount of goals scored by the top scorer.</p>
+            <p>Points:</p>
+            <ul>
+              <li>13 points for right top scorer</li>
+              <li>5 points for right amount of goals scored by the top scorer</li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <div>Select top scorer:</div>
-          {players.map(function(player, index) {
-            var id = player._id + '-' + index;
-            return (
-              <span key={player._id}>
-                <input id={id} name='player' onChange={this.handlePlayerChange.bind(this)} type="radio"/>
-                <label htmlFor={id}>{player.name}</label>
-              </span>
-            );
-          }, this)}
+        <div className="topscorer-bet-container">
+          <div>
+            <div className="section-header">Select team of top scorer:</div>
+            {teams.map(function(team, index) {
+              var id = team._id + '-' + index;
+              return (
+                <span key={team._id}>
+                  <input id={id} name='team' onChange={this.handleTeamChange.bind(this)} type="radio"/>
+                  <label htmlFor={id} className="top-scorer-team">{team.name}</label>
+                </span>
+              );
+            }, this)}
+          </div>
+          <div>
+            <div className="section-header">Select top scorer:</div>
+            {players.map(function(player, index) {
+              var id = player._id + '-' + index;
+              return (
+                <span key={player._id}>
+                  <input id={id} name='player' onChange={this.handlePlayerChange.bind(this)} type="radio"/>
+                  <label htmlFor={id} className="top-scorer-player">{player.name}</label>
+                </span>
+              );
+            }, this)}
+          </div>
         </div>
-        <div>
-          <div>Select number of goals scored by the top scorer:</div>
+        <div className="topscorer-bet-container">
+          <div className="section-header">Select number of goals scored by the top scorer:</div>
           {goals.map(function(goal) {
             var id = 'goal-' + goal;
             var goalName = goal;
@@ -153,12 +167,14 @@ export default AuthenticatedComponent(class TopScorerBet extends Component {
             return (
               <span key={id}>
                 <input id={id} name='goal' defaultChecked={goal===this.state.topscorerbet.goals} onChange={this.handleGoalChange.bind(this)} type="radio"/>
-                <label htmlFor={id}>{goalName}</label>
+                <label htmlFor={id} className="top-scorer-goals">{goalName}</label>
               </span>
             );
           }, this)}
         </div>
-        <input type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+        <div className="save-bets-container">
+          <input className="save-bets-button" type="button" onClick={this.saveBets.bind(this)} value="Save bets"/>
+        </div>
       </div>
     );
   }

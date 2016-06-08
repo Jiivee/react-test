@@ -22,26 +22,7 @@ export default AuthenticatedComponent(class NewTournaments extends Component {
 
     var tournamentData = {
       name: name,
-      owner: userId,
-      game_modes: {
-        goals: document.getElementById("goals").checked,
-        mark: document.getElementById("mark").checked,
-        eighth_finals: document.getElementById("eighth_finalists").checked,
-        quarter_finals: document.getElementById("quarter_finalists").checked,
-        semi_finals: document.getElementById("semi_finalists").checked,
-        finals: document.getElementById("finalists").checked,
-        winner: document.getElementById("winner").checked
-      },
-      points: {
-        goals: 1,
-        mark: 2,
-        extra: 1,
-        eighth_finals: 0,
-        quarter_finals: 0,
-        semi_finals: 0,
-        finals: 0,
-        winner: 0
-      }
+      owner: userId
     }
     console.log(tournamentData);
     $.ajax({
@@ -65,48 +46,12 @@ export default AuthenticatedComponent(class NewTournaments extends Component {
   render() {
     return (
       <div>
-        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <label><input ref="name" placeholder="name" /></label>
-          <div>Select game modes</div>
-          <div>
-            <span>1X2</span>
-            <input id="mark" type="radio" value="on"/>
-            <input type="radio" value="off"/>
+          <div className="auth-form">
+            <div><input ref="name" placeholder="Tournament name" /></div>
+            <div><button type="submit">Create new tournament</button></div>
           </div>
-          <div>
-            <span>Goals</span>
-            <input id="goals" type="radio" value="on"/>
-            <input type="radio" value="off"/>
-          </div>
-          <div>
-            <span>Eighth finalists</span>
-            <input id="eighth_finalists" type="radio" value="on"/>
-            <input type="radio"  value="off"/>
-          </div>
-          <div>
-            <span>Quarter finalists</span>
-            <input type="radio" id="quarter_finalists" value="on"/>
-            <input type="radio" value="off"/>
-          </div>
-          <div>
-            <span>Semi finalists</span>
-            <input type="radio" id="semi_finalists" value="on"/>
-            <input type="radio" value="off"/>
-          </div>
-          <div>
-            <span>Finalists</span>
-            <input type="radio" id="finalists" value="on"/>
-            <input type="radio" value="off"/>
-          </div>
-          <div>
-            <span>Winner</span>
-            <input type="radio" id="winner" value="on"/>
-            <input type="radio" value="off"/>
-          </div>
-
-          <button type="submit">Create new tournament</button>
         </form>
       </div>
     );

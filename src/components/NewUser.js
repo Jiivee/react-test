@@ -27,10 +27,12 @@ class NewUser extends Component {
     console.log(decoded);
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <span>{decoded.email}</span>
-        <label><input ref="name" placeholder="name" /></label>
-        <label><input ref="pass" placeholder="password" /></label>
-        <button type="submit">Save</button>
+        <div className="auth-form">
+          <div>{decoded.email}</div>
+          <div><input ref="name" placeholder="name" type="text"/></div>
+          <div><input ref="pass" placeholder="password" type="password"/></div>
+          <div><button type="submit">Save</button></div>
+        </div>
       </form>
     )
   }

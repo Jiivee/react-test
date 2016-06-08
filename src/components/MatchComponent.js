@@ -52,10 +52,9 @@ class MatchComponent extends Component {
     var setResultRoute = '/matches/' + id + '/setresult';
 
     var user = LoginStore.getUser();
-    console.log(user);
 
     var link = '';
-    if (user.email==='joni.vayrynen@gmail.com') {
+    if (user !== null && user.email==='joni.vayrynen@gmail.com') {
         link = <Link to={setResultRoute}>EDIT</Link>;
     }
 

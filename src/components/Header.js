@@ -24,25 +24,27 @@ class Header extends Component {
     if (LoginStore.isLoggedIn()) {
       loginStatus = (
         <span>
-          <Link to="/bet">Bet</Link>
-          <Link to="/tournaments">Tournaments</Link>
-          <input type="button" value="logout" onClick={this.logout.bind(this)}/>
+          <Link className="header-link" to="/tournaments">Tournaments</Link>
+          <input className="header-logout" type="button" value="logout" onClick={this.logout.bind(this)}/>
         </span>
       );
     } else {
       loginStatus = (
         <span>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign up</Link>
+          <Link className="header-link-log" to="/login">Login</Link>
+          <Link className="header-link-log" to="/signup">Sign up</Link>
         </span>
       );
     }
 
     return (
       <header>
-      Futisveikkaus
-      <Link to="/matches">Matches</Link>
-      {loginStatus}
+        <div className="centerer">
+          <Link className="header-link" to="/">Euro 2016 betting</Link>
+          <Link className="header-link" to="/">Matches</Link>
+          <Link className="header-link" to="/rules">Rules</Link>
+          {loginStatus}
+        </div>
       </header>
     );
   }

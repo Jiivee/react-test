@@ -1,173 +1,282 @@
 @import "variables";
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   background-color: $base-color;
+  color: $text-color;
+  height: 100%;
+}
+
+h2 {
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+p {
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+
+ul {
+  margin-bottom: 7px;
+  margin-top: 7px;
+  padding-left: 25px;
+}
+
+#root {
+  height: 100%;
+}
+
+.all-container {
+  height: 100%;
 }
 
 .centerer {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  padding-top: 5px;
+}
+
+.centerer-main {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   background-color: $white-background;
+  min-height: calc(100% - 70px);
+  padding-top: 20px;
 }
 
 
-.match {
-  height: 28px;
-  font-size: 16px;
-  padding: 10px;
 
-  .time {
-    width: 170px;
+.rules {
+  padding: 0 15px 0 15px;
+}
+
+.auth-form {
+  margin: 0 auto;
+  width: 300px;
+
+  input {
+    width: 300px;
+    font-family: 'Lato', sans-serif;
+    color: $text-color;
+    padding: 10px;
+    font-size: 16px;
+    margin: 8px 0;
     display: inline-block;
-    vertical-align: middle;
+    border: 1px solid lighten($base-color, 30%);
+    border-radius: 4px;
+    box-sizing: border-box;
   }
 
-  .group {
-    width: 25px;
-    display: inline-block;
-    vertical-align: middle;
+  button {
+    width: 300px;
+    border: 1px solid $darkest-base-color;
+    background-color: $darker-base-color;
+    border-radius: 4px;
+    height: 41px;
+    margin-top: 10px;
+    color: $white-text;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
   }
 
-  .home-name {
-    width: 150px;
-    display: inline-block;
-    padding-left: 5px;
-    vertical-align: middle;
+  button:hover {
+    background-color: $darkest-base-color;
+  }
+}
+
+
+
+.tournaments {
+  padding: 0 15px 0 15px;
+
+  .tournament {
+    padding-bottom: 10px;
   }
 
-  .home-score {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: right;
-    width: 20px;
+  .tournament-link {
+    color: $text-color;
+    font-size: 20px;
+    text-decoration: none;
   }
 
-  .divider {
-    vertical-align: middle;
-    display: inline-block;
+  .tournament-link:hover {
+    text-decoration: underline;
   }
+}
 
-  .away-score {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    width: 20px;
-  }
 
-  .away-name {
-    width: 150px;
-    display: inline-block;
-    text-align: right;
-    padding-right: 5px;
-    vertical-align: middle;
-  }
+.tournament {
+  padding: 0 15px 0 15px;
+}
 
-  .ALB {
-    background: url('../images/Albania.png');
-  }
 
-  .AUT {
-    background: url('../images/Austria.png');
-  }
+.matches {
+  padding: 0 15px 0 15px;
 
-  .BEL {
-    background: url('../images/Belgium.png');
-  }
-
-  .CRO {
-    background: url('../images/Croatia.png');
-  }
-
-  .CZE {
-    background: url('../images/Czech Republic.png');
-  }
-
-  .ENG {
-    background: url('../images/England.png');
-  }
-
-  .FRA {
-    background: url('../images/France.png');
-  }
-
-  .GER {
-    background: url('../images/Germany.png');
-  }
-
-  .HUN {
-    background: url('../images/Hungary.png');
-  }
-
-  .ISL {
-    background: url('../images/Iceland.png');
-  }
-
-  .ITA {
-    background: url('../images/Italy.png');
-  }
-
-  .NIR {
-    background: url('../images/Northern Ireland.png');
-  }
-
-  .POL {
-    background: url('../images/Poland.png');
-  }
-
-  .POR {
-    background: url('../images/Portugal.png');
-  }
-
-  .IRL {
-    background: url('../images/Republic of Ireland.png');
-  }
-
-  .ROU {
-    background: url('../images/Romania.png');
-  }
-
-  .RUS {
-    background: url('../images/Russia.png');
-  }
-
-  .SVK {
-    background: url('../images/Slovakia.png');
-  }
-
-  .ESP {
-    background: url('../images/Spain.png');
-  }
-
-  .SWE {
-    background: url('../images/Sweden.png');
-  }
-
-  .SUI {
-    background: url('../images/Switzerland.png');
-  }
-
-  .TUR {
-    background: url('../images/Turkey.png');
-  }
-
-  .UKR {
-    background: url('../images/Ukraine.png');
-  }
-
-  .WAL {
-    background: url('../images/Wales.png');
-  }
-
-  .flag {
-    background-size: 42px 28px;
-    background-repeat: no-repeat;
-    width: 42px;
+  .match {
     height: 28px;
-    display: inline-block;
-    vertical-align: middle;
+    font-size: 16px;
+    padding: 10px 0 10px 0;
+
+    .time {
+      width: 170px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .group {
+      width: 25px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .home-name {
+      width: 150px;
+      display: inline-block;
+      padding-left: 5px;
+      vertical-align: middle;
+    }
+
+    .home-score {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: right;
+      width: 20px;
+    }
+
+    .divider {
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .away-score {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+      width: 20px;
+    }
+
+    .away-name {
+      width: 150px;
+      display: inline-block;
+      text-align: right;
+      padding-right: 5px;
+      vertical-align: middle;
+    }
+
+    .ALB {
+      background: url('../images/Albania.png');
+    }
+
+    .AUT {
+      background: url('../images/Austria.png');
+    }
+
+    .BEL {
+      background: url('../images/Belgium.png');
+    }
+
+    .CRO {
+      background: url('../images/Croatia.png');
+    }
+
+    .CZE {
+      background: url('../images/Czech Republic.png');
+    }
+
+    .ENG {
+      background: url('../images/England.png');
+    }
+
+    .FRA {
+      background: url('../images/France.png');
+    }
+
+    .GER {
+      background: url('../images/Germany.png');
+    }
+
+    .HUN {
+      background: url('../images/Hungary.png');
+    }
+
+    .ISL {
+      background: url('../images/Iceland.png');
+    }
+
+    .ITA {
+      background: url('../images/Italy.png');
+    }
+
+    .NIR {
+      background: url('../images/Northern Ireland.png');
+    }
+
+    .POL {
+      background: url('../images/Poland.png');
+    }
+
+    .POR {
+      background: url('../images/Portugal.png');
+    }
+
+    .IRL {
+      background: url('../images/Republic of Ireland.png');
+    }
+
+    .ROU {
+      background: url('../images/Romania.png');
+    }
+
+    .RUS {
+      background: url('../images/Russia.png');
+    }
+
+    .SVK {
+      background: url('../images/Slovakia.png');
+    }
+
+    .ESP {
+      background: url('../images/Spain.png');
+    }
+
+    .SWE {
+      background: url('../images/Sweden.png');
+    }
+
+    .SUI {
+      background: url('../images/Switzerland.png');
+    }
+
+    .TUR {
+      background: url('../images/Turkey.png');
+    }
+
+    .UKR {
+      background: url('../images/Ukraine.png');
+    }
+
+    .WAL {
+      background: url('../images/Wales.png');
+    }
+
+    .flag {
+      background-size: 42px 28px;
+      background-repeat: no-repeat;
+      width: 42px;
+      height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 }
+
 

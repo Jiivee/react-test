@@ -18,6 +18,9 @@ export default AuthenticatedComponent(class Tournaments extends Component {
   componentWillMount() {
     this.fetchData();
   }
+  ComponentDidMount() {
+    this.fetchData();
+  }
 
   fetchData() {
     var userId = LoginStore.getUserId();
@@ -44,15 +47,14 @@ export default AuthenticatedComponent(class Tournaments extends Component {
     console.log('tournaments:');
     console.log(tournaments);
     return (
-      <div>
-        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
-        <Link to="/newtournament">Create new tournament</Link>
-        <h1>Tournaments</h1>
+      <div className="tournaments">
+        <h2>Your tournaments</h2>
         {tournaments.map(function(tournament) {
           var url = '/tournaments/' + tournament._id;
-          return <div key={tournament._id}><Link to={url}>{tournament.name}</Link></div>;
+          return <div className="tournament" key={tournament._id}><Link className="tournament-link" to={url}>{tournament.name}</Link></div>;
         })}
-
+        <h3>Or create new tournament:</h3>
+        <Link className="tournament-link" to="/newtournament">Create new tournament</Link>
       </div>
     );
   }

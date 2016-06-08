@@ -84,24 +84,41 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
   }
 
   saveBets() {
-    var jwt = LoginStore.getjwt()
-    var tournamentId = this.props.params.tournamentId;
-    $.ajax({
-      type: "PUT",
-      url: Constants.PLAYOFF_BETS_URL,
-      headers: {
-        'x-access-token': jwt
-      },
-      data: JSON.stringify(this.state.playoffbets),
-      contentType: "application/json; charset=utf-8",
-      dataType: "text",
-      success: function(data) {
-        browserHistory.push('/tournaments/' + tournamentId + '/makebets/topscorer/');
-      },
-      error: function(data) {
-        console.log(data);
-      }
-    });
+    if (this.state.playoffbets[0].teams.length !== 16) {
+      alert('Select 16 teams for round of 16');
+    }
+    else if (this.state.playoffbets[1].teams.length !== 8) {
+      alert('Select 8 teams for quarter-finals');
+    }
+    else if (this.state.playoffbets[2].teams.length !== 4) {
+      alert('Select 4 teams for semi-finals');
+    }
+    else if (this.state.playoffbets[3].teams.length !== 2) {
+      alert('Select 2 teams for final');
+    }
+    else if (this.state.playoffbets[4].teams.length !== 1) {
+      alert('Select winner');
+    }
+    else {
+      var jwt = LoginStore.getjwt()
+      var tournamentId = this.props.params.tournamentId;
+      $.ajax({
+        type: "PUT",
+        url: Constants.PLAYOFF_BETS_URL,
+        headers: {
+          'x-access-token': jwt
+        },
+        data: JSON.stringify(this.state.playoffbets),
+        contentType: "application/json; charset=utf-8",
+        dataType: "text",
+        success: function(data) {
+          browserHistory.push('/tournaments/' + tournamentId + '/makebets/topscorer/');
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
   }
 
   isInArray(value, array) {
@@ -115,13 +132,24 @@ export default AuthenticatedComponent(class PlayoffBet extends Component {
       <div className="playoff-playoff-bets">
         <div className="playoff-bet-container">
           <h2>Knockout stage bets</h2>
+          <div>
+            <p>Select for each round the amount of teams told in the headline. Teams on different rounds do not have to depend on each other: for example, you can select that Albania and France are the two finalists but then select that Romania will be the winner.</p>
+            <p>Points:</p>
+            <ul>
+              <li>2 points for each right team in round of 16</li>
+              <li>3 points for each right team in quarter-finals</li>
+              <li>5 points for each right team in semi-finals</li>
+              <li>8 points for each right team in final</li>
+              <li>13 points for right winner</li>
+            </ul>
+          </div>
         </div>
           {playoffbets.map(function(bets, index) {
             var betsKey = index + '-bets';
             var text = [];
-            text[0] = 'Select 16 countries for round of 16';
-            text[1] = 'Select 8 countries for quarter finals';
-            text[2] = 'Select 4 countries for semi finals';
+            text[0] = 'Select 16 teams for round of 16';
+            text[1] = 'Select 8 teams for quarter finals';
+            text[2] = 'Select 4 teams for semi finals';
             text[3] = 'Select 2 finalists';
             text[4] = 'Select winner';
             return (

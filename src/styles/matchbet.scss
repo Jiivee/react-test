@@ -8,7 +8,7 @@
     .team-name {
       width: 120px;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 17px;
       display: inline-block;
     }
 
@@ -18,7 +18,7 @@
       padding-left: 10px;
 
       .goals-row {
-        padding: 8px 0 8px 0;
+        padding: 10px 0 9px 0;
       }
     }
 
@@ -59,10 +59,10 @@
     display:inline-block;
     background-color: $unselect-color;
     border: 1px solid darken($unselect-color, 15%);
-    height: 25px;
-    width: 25px;
     text-align: center;
-    padding-top: 2px;
+    height: 28px;
+    width: 32px;
+    padding-top: 5px;
     margin: 2px;
     -webkit-user-select: none;
     -moz-user-select: none;

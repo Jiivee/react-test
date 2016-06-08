@@ -1,8 +1,31 @@
+@import "variables";
+
 .make-topscorer-bets {
-  .match-bet-container {
-    border-bottom: 1px solid black;
-    padding: 5px;
+  .topscorer-bet-container {
+    border-bottom: 10px solid $base-color;
+    padding: 10px;
+
+    .section-header {
+      padding: 5px 0 10px 0;
+      font-weight: bold;
+      font-size: 17px;
+    }
   }
+
+  .save-bets-container {
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .save-bets-button {
+      padding: 7px;
+      font-size: 16px;
+      background-color: $darkest-base-color;
+      color: #FFF;
+      font-weight: bold;
+      border: 0;
+    }
+  }
+
 
   input[type=radio] {
     display:none;
@@ -10,34 +33,49 @@
   }
 
   input[type=radio] + label {
-    -moz-box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
-    -webkit-box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
-    box-shadow:inset 1px 1px 0px 0px rgb(243,251,235);
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
     display:inline-block;
-    background-color: rgb(198, 242, 149);
-    border: 1px solid rgb(161,234,81);
-    height: 25px;
-    width: 100px;
+    background-color: $unselect-color;
+    border: 1px solid darken($unselect-color, 15%);
     text-align: center;
-    padding-top: 2px;
-    margin-bottom: 3px;
-    overflow: hidden;
+    margin: 2px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    vertical-align: bottom;
   }
 
   input[type=radio]:checked + label {
-    -moz-box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
-    -webkit-box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
-    box-shadow:inset 1px 1px 0px 0px rgb(202,239,171);
-    background-color: rgb(119,212,42);
-    border:1px solid rgb(44,160,26);
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
     font-weight:bold;
     font-style:normal;
     text-decoration:none;
     text-shadow:1px 1px 0px #aade7c;
+  }
+
+  .top-scorer-team {
+    height: 28px;
+    width: 150px;
+    padding-top: 5px;
+  }
+
+  .top-scorer-player {
+    height: 28px;
+    width: 205px;
+    padding-top: 5px;
+  }
+
+  .top-scorer-goals {
+    height: 28px;
+    width: 32px;
+    padding-top: 5px;
   }
 
 }

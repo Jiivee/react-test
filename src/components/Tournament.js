@@ -91,37 +91,58 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
   render() {
     var tournament = this.state.tournament;
-    var tournamentId = this.props.params.tournamentId;
-    var url = '/tournaments/' + tournamentId + '/makebets/match';
-    var points = this.state.points;
-    console.log('tournament:');
     console.log(tournament);
-    console.log(points);
+    var tournamentId = this.props.params.tournamentId;
+    var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
+    var points = this.state.points;
+    var userId = LoginStore.getUserId();
+    var ownResultsUrl = '/tournaments/' + tournamentId + '/results/' + userId;
+
+    var user = LoginStore.getUser();
+    var adNewUser = '';
+    if (user !== null && tournament.owner !== undefined && user.email===tournament.owner.email) {
+        adNewUser = (
+          <div>
+            <div>Invite user:</div>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <label><input type="email" ref="email" placeholder="email" /></label>
+              <button type="submit">Invite</button>
+            </form>
+          </div>
+        );
+    }
+
     return (
-      <div>
-        <h1>Tournament {tournament.name}</h1>
+      <div className="tournament">
+        <h2>{tournament.name}</h2>
 
-        <Link to={url}>Make bets</Link>
+        <div><Link to={makeBetsUrl}>Make/edit your bets</Link></div>
+        <div><Link to={ownResultsUrl}>Show your bets</Link></div>
 
-        <div>Invite user:</div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label><input type="email" ref="email" placeholder="email" /></label>
-          <button type="submit">Invite</button>
-        </form>
+        {adNewUser}
 
-        <div>Points</div>
-        {points.map(function(point) {
-          var urlResults;
-          var userId = point.user._id;
-          var pointId = point._id;
-          var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
-          return (
-            <div key={point._id}>
-              <span><Link to={urlResults}>{point.user.name}</Link></span>
-              <span>{point.match_points}</span>
-            </div>
-          );
-        })}
+        <h3>Points</h3>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Points</td>
+            </tr>
+          </thead>
+          <tbody>
+          {points.map(function(point) {
+            var userId = point.user._id;
+            var pointId = point._id;
+            var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+            return (
+              <tr key={point._id}>
+                <td>{point.user.name}</td>
+                <td>{point.match_points}</td>
+              </tr>
+            );
+          })}
+          </tbody>
+        </table>
 
 
       </div>

@@ -32,13 +32,10 @@ export default AuthenticatedComponent(class Matches extends Component {
 
   render() {
     var matches = this.state.matches;
-    console.log(matches);
     return (
-      <div>
+      <div className="matches">
+        <h2>Matches</h2>
         <div>
-        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
-
-          <h1>aaaaaa</h1>
           {matches.map(function(match) {
             return <MatchComponent key={match._id} match={match} />;
           })}

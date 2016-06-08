@@ -20,9 +20,11 @@ class Login extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <label><input ref="email" placeholder="email" defaultValue="joni.vayrynen@gmail.com" /></label>
-        <label><input ref="pass" placeholder="password" defaultValue="joni"/></label>
-        <button type="submit">login</button>
+        <div className="auth-form">
+          <div><input ref="email" placeholder="email" defaultValue="joni.vayrynen@gmail.com" type="email"/></div>
+          <div><input ref="pass" placeholder="password" defaultValue="joni" type="password"/></div>
+          <div><button type="submit">Login</button></div>
+        </div>
       </form>
     )
   }

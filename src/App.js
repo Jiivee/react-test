@@ -16,9 +16,10 @@ export default class App extends Component {
     }
 
     return (
-      <div>
+
+      <div className="all-container">
         <Header/>
-        <div className="centerer">
+        <div className="centerer-main">
         {this.props.children}
         </div>
         <Footer/>

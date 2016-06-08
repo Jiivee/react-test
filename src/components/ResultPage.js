@@ -45,11 +45,8 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     var matchbets = this.state.matchbets;
     console.log(matchbets);
     return (
-      <div>
+      <div className="matches">
         <div>
-        <h1>Hello {this.props.user ? this.props.user.name : ''}</h1>
-
-          <h1>aaaaaa</h1>
           {matchbets.map(function(matchbet) {
             return <ResultComponent key={matchbet._id} matchbet={matchbet} />;
           })}

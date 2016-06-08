@@ -44,10 +44,10 @@
     display:inline-block;
     background-color: $unselect-color;
     border: 1px solid darken($unselect-color, 15%);
-    height: 25px;
-    width: 150px;
     text-align: center;
-    padding-top: 2px;
+    height: 28px;
+    width: 150px;
+    padding-top: 5px;
     margin: 2px;
     -webkit-user-select: none;
     -moz-user-select: none;

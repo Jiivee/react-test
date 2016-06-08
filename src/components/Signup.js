@@ -20,10 +20,12 @@ class Signup extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <label><input ref="name" placeholder="name" defaultValue="joni" /></label>
-        <label><input ref="email" placeholder="email" defaultValue="joni.vayrynen@gmail.com" /></label>
-        <label><input ref="pass" placeholder="password" defaultValue="joni"/></label>
-        <button type="submit">Sign up</button>
+        <div className="auth-form">
+          <div><input ref="name" placeholder="name" defaultValue="joni" type="text"/></div>
+          <div><input ref="email" placeholder="email" defaultValue="joni.vayrynen@gmail.com" type="email"/></div>
+          <div><input ref="pass" placeholder="password" defaultValue="joni" type="password"/></div>
+          <div><button type="submit">Sign up</button></div>
+        </div>
       </form>
     )
   }

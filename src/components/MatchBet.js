@@ -150,8 +150,16 @@ export default AuthenticatedComponent(class MatchBet extends Component {
       <div className="make-match-bets">
         <div className="match-bet-container">
           <h2>Group stage bets</h2>
-          <div>
-
+          <div className="">
+            <p>Select the amount of goals for home and away team. Also select whether home team wins (1), teams draw (X) or away team wins (2). The score bet and the 1X2 bet may conflict: for example, you can select 3 goals for home team and 1 goal for away team and still select X.</p>
+            <p>Points:</p>
+            <ul>
+              <li>1 point for right amount of home team goals</li>
+              <li>1 point for right amount of away team goals</li>
+              <li>2 points for right 1X2 bet</li>
+              <li>1 extra point if all are right</li>
+            </ul>
+            <p>So the maximum points from each game are 5 points.</p>
           </div>
         </div>
         {betRows}

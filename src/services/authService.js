@@ -16,10 +16,10 @@ class AuthService {
         console.log(data);
         let jwt = data.token;
         LoginActions.loginUser(jwt);
-        browserHistory.push('/');
+        browserHistory.push('/tournaments');
       },
       error: function(data) {
-        console.log(data);
+        alert('Invalid email or password');
       }
     });
   }
@@ -37,10 +37,16 @@ class AuthService {
       },
       success: function(data) {
         console.log(data);
-        browserHistory.push('/');
+        browserHistory.push('/login');
       },
       error: function(data) {
-        console.log(data);
+        if (data.status === 409) {
+          alert('An account with that email already exits.');
+        }
+        else {
+          alert('Error in signup');
+        }
+
       }
     });
   }
@@ -61,7 +67,7 @@ class AuthService {
         browserHistory.push('/login');
       },
       error: function(data) {
-        console.log(data);
+        alert('You have already added user name and password. Please, try to login instead.');
       }
     });
   }
