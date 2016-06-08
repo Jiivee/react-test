@@ -13,7 +13,7 @@ class Signup extends Component {
 
     const email = this.refs.email.value;
     const password = this.refs.pass.value;
-    const name = this.refs.pass.value;
+    const name = this.refs.name.value;
     auth.signup(name, email, password);
   }
 
