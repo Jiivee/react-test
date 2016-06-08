@@ -1,4 +1,4 @@
-var BASE_URL = 'http://localhost:3002/';
+var BASE_URL = 'https://betbackend.herokuapp.com/';
 export const Constants = {
   BASE_URL: BASE_URL,
   LOGIN_URL: BASE_URL + 'authenticate/',
