@@ -21,8 +21,8 @@ class Login extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div className="auth-form">
-          <div><input ref="email" placeholder="email" defaultValue="joni.vayrynen@gmail.com" type="email"/></div>
-          <div><input ref="pass" placeholder="password" defaultValue="joni" type="password"/></div>
+          <div><input ref="email" placeholder="email" type="email"/></div>
+          <div><input ref="pass" placeholder="password" type="password"/></div>
           <div><button type="submit">Login</button></div>
         </div>
       </form>
