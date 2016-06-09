@@ -94,6 +94,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
     var points = this.state.points;
     var userId = LoginStore.getUserId();
     var ownResultsUrl = '/tournaments/' + tournamentId + '/results/' + userId;
+    var userEmail = LoginStore.getUser().email;
 
     var user = LoginStore.getUser();
     var adNewUser = '';
@@ -132,12 +133,22 @@ export default AuthenticatedComponent(class Tournament extends Component {
               var userId = point.user._id;
               var pointId = point._id;
               var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
-              return (
-                <tr key={point._id}>
-                  <td>{point.user.name}</td>
-                  <td>{point.match_points}</td>
-                </tr>
-              );
+              if (userEmail === 'joni.vayrynen@gmail.com') {
+                return (
+                  <tr key={point._id}>
+                    <td><Link to={urlResults}>{point.user.name}</Link></td>
+                    <td>{point.match_points}</td>
+                  </tr>
+                );
+              }
+              else {
+                return (
+                  <tr key={point._id}>
+                    <td>{point.user.name}</td>
+                    <td>{point.match_points}</td>
+                  </tr>
+                );
+              }
             }
           })}
           </tbody>
