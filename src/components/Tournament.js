@@ -30,7 +30,6 @@ export default AuthenticatedComponent(class Tournament extends Component {
       'x-access-token': jwt
     });
     var path = Constants.TOURNAMENTS_URL + tournamentId;
-    console.log(path);
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -51,7 +50,6 @@ export default AuthenticatedComponent(class Tournament extends Component {
       'x-access-token': jwt
     });
     var path = Constants.POINTS_URL + tournamentId;
-    console.log(path);
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -91,7 +89,6 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
   render() {
     var tournament = this.state.tournament;
-    console.log(tournament);
     var tournamentId = this.props.params.tournamentId;
     var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
     var points = this.state.points;
@@ -131,15 +128,17 @@ export default AuthenticatedComponent(class Tournament extends Component {
           </thead>
           <tbody>
           {points.map(function(point) {
-            var userId = point.user._id;
-            var pointId = point._id;
-            var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
-            return (
-              <tr key={point._id}>
-                <td>{point.user.name}</td>
-                <td>{point.match_points}</td>
-              </tr>
-            );
+            if (point.user !== null && point.user.name !== undefined) {
+              var userId = point.user._id;
+              var pointId = point._id;
+              var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+              return (
+                <tr key={point._id}>
+                  <td>{point.user.name}</td>
+                  <td>{point.match_points}</td>
+                </tr>
+              );
+            }
           })}
           </tbody>
         </table>
