@@ -54,7 +54,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     var myHeaders = new Headers({
       'x-access-token': jwt
     });
-    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId;
+    var path = Constants.PLAYOFF_BETS_URL + userId + '/' + tournamentId + '/teams';
     fetch(path, {
       method: 'get',
       headers: myHeaders
@@ -111,6 +111,14 @@ export default AuthenticatedComponent(class ResultPage extends Component {
         <h2>Bets of {userName}</h2>
         <h3>Group stage</h3>
         <div className="result-section">
+          <div className="match-header">
+            <span className="header-time">Time</span>
+            <span className="header-home">Home team</span>
+            <span className="header-result">Result</span>
+            <span className="header-away">Away team</span>
+            <span className="header-bets">Bets</span>
+            <span className="header-points">Points</span>
+          </div>
           {matchbets.map(function(matchbet) {
             return <ResultComponent key={matchbet._id} matchbet={matchbet} />;
           }, this)}

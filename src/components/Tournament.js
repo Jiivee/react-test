@@ -98,7 +98,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
     var user = LoginStore.getUser();
     var adNewUser = '';
-    if (user !== null && tournament.owner !== undefined && user.email===tournament.owner.email) {
+    if (user !== null && tournament.owner !== undefined && user.email===tournament.owner.email && 1===2) {
         adNewUser = (
           <div>
             <div>Invite user:</div>
@@ -114,17 +114,21 @@ export default AuthenticatedComponent(class Tournament extends Component {
       <div className="tournament">
         <h2>{tournament.name}</h2>
 
+        {/*
         <div><Link to={makeBetsUrl}>Make/edit your bets</Link></div>
         <div><Link to={ownResultsUrl}>Show your bets</Link></div>
-
+        */}
         {adNewUser}
 
         <h3>Points</h3>
         <table>
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Points</td>
+              <td className="name-col">Name</td>
+              <td>Group stage</td>
+              <td>Knockout stage</td>
+              <td>Top scorer</td>
+              <td>Total</td>
             </tr>
           </thead>
           <tbody>
@@ -133,22 +137,15 @@ export default AuthenticatedComponent(class Tournament extends Component {
               var userId = point.user._id;
               var pointId = point._id;
               var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
-              if (userEmail === 'joni.vayrynen@gmail.com') {
-                return (
-                  <tr key={point._id}>
-                    <td><Link to={urlResults}>{point.user.name}</Link></td>
-                    <td>{point.match_points}</td>
-                  </tr>
-                );
-              }
-              else {
-                return (
-                  <tr key={point._id}>
-                    <td>{point.user.name}</td>
-                    <td>{point.match_points}</td>
-                  </tr>
-                );
-              }
+              return (
+                <tr key={point._id}>
+                  <td className="name-col"><Link to={urlResults}>{point.user.name}</Link></td>
+                  <td>{point.match_points}</td>
+                  <td>{point.playoff_points}</td>
+                  <td>{point.topscorer_points}</td>
+                  <td>{point.total_points}</td>
+                </tr>
+              );
             }
           })}
           </tbody>

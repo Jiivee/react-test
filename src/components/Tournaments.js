@@ -34,7 +34,6 @@ export default AuthenticatedComponent(class Tournaments extends Component {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       this.setState({
         tournaments: data.tournaments
       });
@@ -44,8 +43,6 @@ export default AuthenticatedComponent(class Tournaments extends Component {
 
   render() {
     var tournaments = this.state.tournaments;
-    console.log('tournaments:');
-    console.log(tournaments);
     return (
       <div className="tournaments">
         <h2>Your tournaments</h2>

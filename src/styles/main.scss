@@ -130,16 +130,148 @@ ul {
 
 .tournament {
   padding: 0 15px 0 15px;
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  thead {
+    background-color: $darker-base-color;
+    color: $white-text;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: $unselect-color;
+  }
+
+  td {
+    padding: 5px;
+    text-align: center;
+    width: 100px;
+  }
+
+  .name-col {
+    text-align: left;
+    padding-left: 10px;
+    width: 135px;
+  }
 }
 
 
 .matches {
   padding: 0 15px 0 15px;
 
+  .match-header {
+    font-size: 16px;
+    font-weight: bold;
+
+    .header-time {
+      display: inline-block;
+    }
+
+    .header-home {
+      display: inline-block;
+      padding-left: 158px;
+    }
+
+    .header-result {
+      display: inline-block;
+      padding-left: 115px;
+    }
+
+    .header-away {
+      display: inline-block;
+      padding-left: 118px;
+    }
+
+    .header-bets {
+      display: inline-block;
+      padding-left: 67px;
+    }
+
+    .header-points {
+      display: inline-block;
+      padding-left: 48px;
+    }
+  }
+
   .match {
     height: 28px;
     font-size: 16px;
     padding: 10px 0 10px 0;
+
+    .bet-results {
+      padding-left: 20px;
+
+      .bet {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        background-color: $unselect-color;
+        border: 1px solid darken($unselect-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .bet-right {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        background-color: $select-color;
+        border:1px solid darken($select-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .bet-wrong {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        background-color: $wrong-color;
+        border:1px solid darken($wrong-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .points {
+        padding-left: 20px;
+      }
+    }
 
     .time {
       width: 170px;

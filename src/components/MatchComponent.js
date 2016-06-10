@@ -19,7 +19,7 @@ class MatchComponent extends Component {
     //Date stuff
     var date = new Date(this.props.match.time);
 
-    var dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     var dayName = dayNames[date.getDay()];
 
     var dd = date.getDate();
@@ -27,7 +27,7 @@ class MatchComponent extends Component {
     var yyyy = date.getFullYear();
     var dateFormat = dd+'.'+mm+'.'+yyyy;
 
-    var hh = date.getHours();
+    var hh = date.getHours() -1;
     var min = date.getMinutes();
     if (hh<10) {
         hh='0'+hh
