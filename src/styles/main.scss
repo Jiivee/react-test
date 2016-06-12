@@ -129,7 +129,7 @@ ul {
 
 
 .tournament {
-  padding: 0 15px 0 15px;
+  padding: 0 15px 5px 15px;
 
   a {
     text-decoration: none;
@@ -142,6 +142,7 @@ ul {
 
   table {
     border-collapse: collapse;
+    margin-bottom: 25px;
   }
 
   thead {
@@ -165,6 +166,11 @@ ul {
     text-align: left;
     padding-left: 10px;
     width: 135px;
+  }
+
+  .bet-divider {
+    display: inline-block;
+    width: 15px;
   }
 }
 

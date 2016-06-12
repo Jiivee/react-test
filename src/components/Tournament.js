@@ -14,13 +14,35 @@ export default AuthenticatedComponent(class Tournament extends Component {
     super(props);
     this.state = {
       tournament: {},
-      points: []
+      points: [],
+      nextbets: []
     };
   }
 
   componentWillMount() {
     this.fetchTournament();
     this.fetchPoints();
+    this.fetchNextBets();
+  }
+
+  fetchNextBets() {
+    var tournamentId = this.props.params.tournamentId;
+    var jwt = LoginStore.getjwt()
+    var myHeaders = new Headers({
+      'x-access-token': jwt
+    });
+    var path = Constants.MATCH_BETS_URL + '/nextbets/' + tournamentId;
+    fetch(path, {
+      method: 'get',
+      headers: myHeaders
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        nextbets: data
+      });
+    })
+    .catch(e => {console.log(e)});
   }
 
   fetchTournament() {
@@ -89,12 +111,15 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
   render() {
     var tournament = this.state.tournament;
+    var nextbets = this.state.nextbets;
     var tournamentId = this.props.params.tournamentId;
     var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
     var points = this.state.points;
     var userId = LoginStore.getUserId();
     var ownResultsUrl = '/tournaments/' + tournamentId + '/results/' + userId;
     var userEmail = LoginStore.getUser().email;
+
+    //console.log(points);
 
     var user = LoginStore.getUser();
     var adNewUser = '';
@@ -148,6 +173,41 @@ export default AuthenticatedComponent(class Tournament extends Component {
               );
             }
           })}
+          </tbody>
+        </table>
+        <h3>Bets of the next matches</h3>
+        <table>
+          {nextbets.slice(0,1).map(function(nextbet) {
+            return (
+              <thead key="bet-header">
+                <tr>
+                  <td  className="name-col">Name</td>
+                  {nextbet.map(function(bet) {
+                    var key = bet._id + '-head';
+                    return (
+                      <td key={key}>{bet.match.home_team.short_name}-{bet.match.away_team.short_name}</td>
+                    );
+                  })}
+                </tr>
+              </thead>
+            );
+          })}
+          <tbody>
+            {nextbets.map(function(nextbet) {
+              var userId = nextbet[0].user._id;
+              var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+              var key = userId + -'row';
+              return (
+                <tr key={key}>
+                  <td className="name-col"><Link to={urlResults}>{nextbet[0].user.name}</Link></td>
+                  {nextbet.map(function(bet) {
+                    return (
+                      <td key={bet._id}>{bet.score.home}-{bet.score.away}<span className="bet-divider"></span>{bet.mark}</td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 
