@@ -159,7 +159,12 @@ ul {
   td {
     padding: 5px;
     text-align: center;
-    width: 100px;
+    width: 110px;
+
+    .match-and-result {
+      width: 80px;
+      display: inline-block;
+    }
   }
 
   .name-col {
@@ -171,6 +176,47 @@ ul {
   .bet-divider {
     display: inline-block;
     width: 15px;
+  }
+
+  .bet-divider2 {
+    display: inline-block;
+    width: 7px;
+  }
+
+  .bet-right {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 0 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 22px;
+    width: 23px;
+    padding-top: 1px;
+  }
+
+  .bet-wrong {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    background-color: $wrong-color;
+    border:1px solid darken($wrong-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 0 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 22px;
+    width: 23px;
+    padding-top: 1px;
   }
 }
 
