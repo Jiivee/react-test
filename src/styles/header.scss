@@ -1,12 +1,15 @@
 @import "variables";
 
 header {
-  height: 50px;
-  font-size: 16px;
   background-color: $darkest-base-color;
   font-family: Oswald,sans-serif;
   text-transform: uppercase;
   font-size: 24px;
+  padding-left: 15px;
+
+  .links {
+    display: inline-block;
+  }
 
   .header-link {
     color: $white-text;
@@ -18,33 +21,60 @@ header {
     color: darken($white-text, 20%);
   }
 
-  .header-link-log {
-    padding-top: 3px;
-    color: $white-text;
-    text-decoration: none;
-    padding-right: 10px;
+  .login-status {
     float: right;
+    padding-top: 4px;
+
+    .header-link-log {
+      color: $white-text;
+      text-decoration: none;
+      padding-right: 10px;
+      float: right;
+      font-size: 20px;
+    }
+
+    .header-link-log:hover {
+      color: darken($white-text, 20%);
+    }
+
+    .header-logout {
+      color: $white-text;
+      text-decoration: none;
+      padding-right: 10px;
+      float: right;
+      text-transform: uppercase;
+      font-family: Oswald,sans-serif;
+      font-size: 18px;
+      background: none;
+      border: none;
+    }
+
+    .header-logout:hover {
+      color: darken($white-text, 20%);
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    padding: 0 5px 0 5px;
     font-size: 20px;
+
+    .login-status {
+      padding-top: 2px;
+
+      .header-link-log {
+        font-size: 17px;
+      }
+    }
+
   }
 
-  .header-link-log:hover {
-    color: darken($white-text, 20%);
+}
+
+@media only screen and (max-width: 400px) {
+  header {
+
   }
 
-  .header-logout {
-    padding-top: 6px;
-    color: $white-text;
-    text-decoration: none;
-    padding-right: 10px;
-    float: right;
-    text-transform: uppercase;
-    font-family: Oswald,sans-serif;
-    font-size: 18px;
-    background: none;
-    border: none;
-  }
-
-  .header-logout:hover {
-    color: darken($white-text, 20%);
-  }
 }

@@ -21,16 +21,22 @@ class Header extends Component {
 
 
     var loginStatus;
+    var links;
     if (LoginStore.isLoggedIn()) {
-      loginStatus = (
-        <span>
+      links = (
+        <div className="links">
+          <Link className="header-link" to="/rules">Rules</Link>
           <Link className="header-link" to="/tournaments">Tournaments</Link>
+        </div>
+      );
+      loginStatus = (
+        <span className="login-status">
           <input className="header-logout" type="button" value="logout" onClick={this.logout.bind(this)}/>
         </span>
       );
     } else {
       loginStatus = (
-        <span>
+        <span className="login-status">
           <Link className="header-link-log" to="/login">Login</Link>
           <Link className="header-link-log" to="/signup">Sign up</Link>
         </span>
@@ -41,9 +47,8 @@ class Header extends Component {
       <header>
         <div className="centerer">
           <Link className="header-link" to="/">Euro 2016 betting</Link>
-          <Link className="header-link" to="/">Matches</Link>
-          <Link className="header-link" to="/rules">Rules</Link>
           {loginStatus}
+          {links}
         </div>
       </header>
     );

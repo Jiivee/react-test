@@ -1,0 +1,169 @@
+@import "variables";
+
+.tournament {
+  padding: 0 15px 5px 15px;
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin-bottom: 25px;
+  }
+
+  thead {
+    background-color: $darker-base-color;
+    color: $white-text;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: $unselect-color;
+  }
+
+  td {
+    padding: 5px;
+    text-align: center;
+    width: 110px;
+
+    .match-and-result {
+      width: 80px;
+      display: inline-block;
+    }
+  }
+
+  .name-col {
+    text-align: left;
+    padding-left: 10px;
+    width: 135px;
+  }
+
+  .bet-divider {
+    display: inline-block;
+    width: 15px;
+  }
+
+  .bet-divider2 {
+    display: inline-block;
+    width: 7px;
+  }
+
+  .bet-right {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 0 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 22px;
+    width: 23px;
+    padding-top: 1px;
+  }
+
+  .bet-wrong {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    background-color: $wrong-color;
+    border:1px solid darken($wrong-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 0 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 22px;
+    width: 23px;
+    padding-top: 1px;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .tournament {
+    padding: 0 0 5px 0;
+
+    table {
+      font-size: 13px;
+
+      .name-col-span {
+        display: inline-block;
+        max-width: 70px;
+      }
+    }
+
+    .name-col {
+      text-align: left;
+      padding-left: 10px;
+      width: 70px;
+      max-width: 70px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .bet-divider2 {
+      width: 4px;
+    }
+
+    .bet-right {
+      -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+      -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+      box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+      background-color: $select-color;
+      border:1px solid darken($select-color, 15%);
+      display:inline-block;
+      text-align: center;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      height: 15px;
+      width: 15px;
+      padding-top: 1px;
+      font-size: 12px;
+    }
+
+    .bet-wrong {
+      -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+      -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+      box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+      background-color: $wrong-color;
+      border:1px solid darken($wrong-color, 15%);
+      display:inline-block;
+      text-align: center;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      height: 15px;
+      width: 15px;
+      padding-top: 1px;
+      font-size: 12px;
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 400px) {
+
+
+}

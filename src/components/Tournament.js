@@ -7,7 +7,6 @@ import { browserHistory, Link } from 'react-router';
 
 const title = 'Tournament';
 
-
 export default AuthenticatedComponent(class Tournament extends Component {
 
   constructor(props) {
@@ -170,7 +169,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
         <table>
           <thead>
             <tr>
-              <td className="name-col">Name</td>
+              <td className="name-col"><span className="name-col-span">Name</span></td>
               <td>Group stage</td>
               <td>Knockout stage</td>
               <td>Top scorer</td>
@@ -185,7 +184,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
               var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
               return (
                 <tr key={point._id}>
-                  <td className="name-col"><Link to={urlResults}>{point.user.name}</Link></td>
+                  <td className="name-col"><span className="name-col-span"><Link to={urlResults}>{point.user.name}</Link></span></td>
                   <td>{point.match_points}</td>
                   <td>{point.playoff_points}</td>
                   <td>{point.topscorer_points}</td>
@@ -203,10 +202,17 @@ export default AuthenticatedComponent(class Tournament extends Component {
               <thead key="bet-header">
                 <tr>
                   <td  className="name-col">Name</td>
-                  {nextbet.map(function(bet) {
+                  {nextbet.map(function(bet, index) {
                     var key = bet._id + '-head';
+                    var row;
+                    if (index === 3) {
+                      row = <td className="hide" key={key}>{bet.match.home_team.short_name}-{bet.match.away_team.short_name}</td>;
+                    }
+                    else {
+                      row = <td key={key}>{bet.match.home_team.short_name}-{bet.match.away_team.short_name}</td>;
+                    }
                     return (
-                      <td key={key}>{bet.match.home_team.short_name}-{bet.match.away_team.short_name}</td>
+                      row
                     );
                   })}
                 </tr>
@@ -220,10 +226,17 @@ export default AuthenticatedComponent(class Tournament extends Component {
               var key = userId + -'row';
               return (
                 <tr key={key}>
-                  <td className="name-col"><Link to={urlResults}>{nextbet[0].user.name}</Link></td>
-                  {nextbet.map(function(bet) {
+                  <td className="name-col"><span className="name-col-span"><Link to={urlResults}>{nextbet[0].user.name}</Link></span></td>
+                  {nextbet.map(function(bet, index) {
+                    var row;
+                    if (index === 3) {
+                      row = <td className="hide" key={bet._id}>{bet.score.home}-{bet.score.away}<span className="bet-divider"></span>{bet.mark}</td>;
+                    }
+                    else {
+                      row = <td key={bet._id}>{bet.score.home}-{bet.score.away}<span className="bet-divider"></span>{bet.mark}</td>;
+                    }
                     return (
-                      <td key={bet._id}>{bet.score.home}-{bet.score.away}<span className="bet-divider"></span>{bet.mark}</td>
+                      row
                     );
                   })}
                 </tr>
@@ -238,11 +251,18 @@ export default AuthenticatedComponent(class Tournament extends Component {
               <thead key="bet-header">
                 <tr>
                   <td  className="name-col">Name</td>
-                  {nextbet.map(function(bet) {
+                  {nextbet.map(function(bet, index) {
                     var key = bet._id + '-head';
                     var match = bet.match;
+                    var row;
+                    if (index === 3) {
+                      row = <td className="hide" key={key}><span><div>{match.home_team.short_name}-{match.away_team.short_name}</div><div>{match.score.home}-{match.score.away}</div></span></td>;
+                    }
+                    else {
+                      row = <td key={key}><span><div>{match.home_team.short_name}-{match.away_team.short_name}</div><div>{match.score.home}-{match.score.away}</div></span></td>;
+                    }
                     return (
-                      <td key={key}><span><div>{match.home_team.short_name}-{match.away_team.short_name}</div><div>{match.score.home}-{match.score.away}</div></span></td>
+                      row
                     );
                   })}
                 </tr>
@@ -256,14 +276,15 @@ export default AuthenticatedComponent(class Tournament extends Component {
               var key = userId + -'row';
               return (
                 <tr key={key}>
-                  <td className="name-col"><Link to={urlResults}>{nextbet[0].user.name}</Link></td>
-                  {nextbet.map(function(bet) {
+                  <td className="name-col"><span className="name-col-span"><Link to={urlResults}>{nextbet[0].user.name}</Link></span></td>
+                  {nextbet.map(function(bet, index) {
                     var homeBet = bet.score.home;
                     var awayBet = bet.score.away;
                     var markBet = bet.mark;
                     var homeBetSpan = '';
                     var awayBetSpan = '';
                     var markBetSpan = '';
+                    var row;
                     if (bet.score.home === bet.match.score.home) {
                       homeBetSpan = <span className="bet-right">{homeBet}</span>;
                     }
@@ -284,8 +305,15 @@ export default AuthenticatedComponent(class Tournament extends Component {
                     else {
                       markBetSpan = <span className="bet-wrong">{markBet}</span>;
                     }
+
+                    if (index === 3) {
+                      row = <td className="hide" key={bet._id}>{homeBetSpan}-{awayBetSpan}<span className="bet-divider2"></span>{markBetSpan}</td>;
+                    }
+                    else {
+                      row = <td key={bet._id}>{homeBetSpan}-{awayBetSpan}<span className="bet-divider2"></span>{markBetSpan}</td>;
+                    }
                     return (
-                      <td key={bet._id}>{homeBetSpan}-{awayBetSpan}<span className="bet-divider2"></span>{markBetSpan}</td>
+                      row
                     );
                   })}
                 </tr>

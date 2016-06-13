@@ -1,0 +1,423 @@
+@import "variables";
+
+.matches {
+  padding: 0 15px 0 15px;
+
+  .match-header {
+    font-size: 16px;
+    font-weight: bold;
+
+    .header-time {
+      display: inline-block;
+    }
+
+    .header-home {
+      display: inline-block;
+      padding-left: 158px;
+    }
+
+    .header-result {
+      display: inline-block;
+      padding-left: 115px;
+    }
+
+    .header-away {
+      display: inline-block;
+      padding-left: 118px;
+    }
+
+    .header-bets {
+      display: inline-block;
+      padding-left: 67px;
+    }
+
+    .header-points {
+      display: inline-block;
+      padding-left: 48px;
+    }
+  }
+
+  .match {
+    font-size: 16px;
+    padding: 10px 0 10px 0;
+
+    .time {
+      width: 170px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .group {
+      width: 25px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .teams-container {
+      display: inline-block;
+
+      .home-team-container {
+        display: inline-block;
+
+        .home-name {
+          width: 150px;
+          display: inline-block;
+          padding-left: 5px;
+          vertical-align: middle;
+        }
+
+        .home-score {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: right;
+          width: 20px;
+        }
+      }
+
+      .away-team-container {
+        display: inline-block;
+
+        .away-name {
+          width: 150px;
+          display: inline-block;
+          text-align: right;
+          padding-right: 5px;
+          vertical-align: middle;
+        }
+
+        .away-score {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: left;
+          width: 20px;
+        }
+      }
+    }
+
+
+
+    .divider {
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+
+    .bet-results {
+      display: inline-block;
+      padding-left: 20px;
+
+      .bet-results-score {
+        display: inline-block;
+      }
+
+      .bet-results-mark {
+        display: inline-block;
+      }
+
+      .bet {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+        background-color: $unselect-color;
+        border: 1px solid darken($unselect-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .bet-right {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+        background-color: $select-color;
+        border:1px solid darken($select-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .bet-wrong {
+        -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+        background-color: $wrong-color;
+        border:1px solid darken($wrong-color, 15%);
+        display:inline-block;
+        text-align: center;
+        margin: 0 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 25px;
+        width: 28px;
+        padding-top: 3px;
+      }
+
+      .points {
+        padding-left: 20px;
+      }
+    }
+
+
+    .ALB {
+      background: url('../images/Albania.png');
+    }
+
+    .AUT {
+      background: url('../images/Austria.png');
+    }
+
+    .BEL {
+      background: url('../images/Belgium.png');
+    }
+
+    .CRO {
+      background: url('../images/Croatia.png');
+    }
+
+    .CZE {
+      background: url('../images/Czech Republic.png');
+    }
+
+    .ENG {
+      background: url('../images/England.png');
+    }
+
+    .FRA {
+      background: url('../images/France.png');
+    }
+
+    .GER {
+      background: url('../images/Germany.png');
+    }
+
+    .HUN {
+      background: url('../images/Hungary.png');
+    }
+
+    .ISL {
+      background: url('../images/Iceland.png');
+    }
+
+    .ITA {
+      background: url('../images/Italy.png');
+    }
+
+    .NIR {
+      background: url('../images/Northern Ireland.png');
+    }
+
+    .POL {
+      background: url('../images/Poland.png');
+    }
+
+    .POR {
+      background: url('../images/Portugal.png');
+    }
+
+    .IRL {
+      background: url('../images/Republic of Ireland.png');
+    }
+
+    .ROU {
+      background: url('../images/Romania.png');
+    }
+
+    .RUS {
+      background: url('../images/Russia.png');
+    }
+
+    .SVK {
+      background: url('../images/Slovakia.png');
+    }
+
+    .ESP {
+      background: url('../images/Spain.png');
+    }
+
+    .SWE {
+      background: url('../images/Sweden.png');
+    }
+
+    .SUI {
+      background: url('../images/Switzerland.png');
+    }
+
+    .TUR {
+      background: url('../images/Turkey.png');
+    }
+
+    .UKR {
+      background: url('../images/Ukraine.png');
+    }
+
+    .WAL {
+      background: url('../images/Wales.png');
+    }
+
+    .home-flag {
+      background-size: 42px 28px;
+      background-repeat: no-repeat;
+      width: 42px;
+      height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .away-flag {
+      background-size: 42px 28px;
+      background-repeat: no-repeat;
+      width: 42px;
+      height: 28px;
+      display: inline-block;
+      vertical-align: middle;
+      float: right;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .matches {
+    padding: 0;
+
+    .match-header {
+      display: none;
+    }
+
+    .match {
+      font-size: 15px;
+
+      .time {
+        display: block;
+        background-color: $darker-base-color;
+        width: 100%;
+        padding: 2px 5px 2px 5px;
+        color: $white-text;
+      }
+
+      .group {
+        display: none;
+      }
+
+      .teams-container {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 5px;
+        width: calc(100% - 91px);
+
+        .home-team-container {
+          display: block;
+          padding: 5px 0 3px 0;
+
+          .home-name {
+            width: 130px;
+          }
+
+          .home-score {
+            text-align: left;
+            float: right;
+            padding-top: 4px;
+          }
+        }
+
+        .away-team-container {
+          display: block;
+          padding: 3px 0 5px 0;
+
+          .away-name {
+            width: 130px;
+            float: left;
+            text-align: left;
+            padding-left: 5px;
+            padding-right: 0;
+            padding-top: 4px;
+          }
+
+          .away-score {
+            float: right;
+            padding-top: 5px;
+          }
+        }
+      }
+
+      .bet-results {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        .bet-results-score {
+          display: inline-block;
+          padding-top: 5px;
+        }
+
+        .bet-results-mark {
+          display: inline-block;
+          padding-top: 5px;
+          vertical-align: top;
+        }
+
+        .bet {
+          display: block;
+          height: 23px;
+          width: 26px;
+          padding-top: 3px;
+        }
+
+        .bet-right {
+          display: block;
+          height: 23px;
+          width: 26px;
+          padding-top: 3px;
+        }
+
+        .bet-wrong {
+          display: block;
+          height: 23px;
+          width: 26px;
+          padding-top: 3px;
+        }
+
+        .away-bet-score {
+          margin-top: 6px;
+        }
+
+        .points {
+          padding-top: 9px;
+          padding-left: 15px;
+          display: block;
+        }
+
+
+
+
+
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .away-flag {
+        float: left;
+      }
+
+
+    }
+  }
+}

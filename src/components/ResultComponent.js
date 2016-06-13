@@ -11,9 +11,9 @@ class ResultComponent extends Component {
   render() {
     //Classes for flags
     var home = this.props.matchbet.match.home_team.short_name;
-    var homeClasses = classNames(home, 'flag');
+    var homeClasses = classNames(home, 'home-flag');
     var away = this.props.matchbet.match.away_team.short_name;
-    var awayClasses = classNames(away, 'flag');
+    var awayClasses = classNames(away, 'away-flag');
 
     //Date stuff
     var date = new Date(this.props.matchbet.match.time);
@@ -62,6 +62,8 @@ class ResultComponent extends Component {
     var id = this.props.matchbet.match._id;
     var setResultRoute = '/matches/' + id + '/setresult';
 
+
+    var awayBetClasses;
     var homeBetSpan = '';
     var awayBetSpan = '';
     var markBetSpan = '';
@@ -79,10 +81,12 @@ class ResultComponent extends Component {
       }
 
       if (this.props.matchbet.match.score.away === this.props.matchbet.score.away) {
-        awayBetSpan = <span className="bet-right">{awayBet}</span>;
+        awayBetClasses = classNames('away-bet-score', 'bet-right');
+        awayBetSpan = <span className={awayBetClasses}>{awayBet}</span>;
       }
       else {
-        awayBetSpan = <span className="bet-wrong">{awayBet}</span>;
+        awayBetClasses = classNames('away-bet-score', 'bet-wrong');
+        awayBetSpan = <span className={awayBetClasses}>{awayBet}</span>;
       }
 
       if (this.props.matchbet.match.mark === this.props.matchbet.mark) {
@@ -96,22 +100,32 @@ class ResultComponent extends Component {
 
     return (
       <div className="match">
-        <span className="time">{dayName} {dateFormat} {timeFormat}</span>
+        <div className="time">{dayName} {dateFormat} {timeFormat}</div>
         <span className="group">{this.props.matchbet.match.group.name}</span>
-        <span className={homeClasses}></span>
-        <span className="home-name">{this.props.matchbet.match.home_team.name}</span>
-        <span className="home-score">{homeScore}</span>
-        <span className="divider">-</span>
-        <span className="away-score">{awayScore}</span>
-        <span className="away-name">{this.props.matchbet.match.away_team.name}</span>
-        <span className={awayClasses}></span>
-        <span className="bet-results">
-          {homeBetSpan}
+        <div className="teams-container">
+          <div className="home-team-container">
+            <span className={homeClasses}></span>
+            <span className="home-name">{this.props.matchbet.match.home_team.name}</span>
+            <span className="home-score">{homeScore}</span>
+          </div>
           <span className="divider">-</span>
-          {awayBetSpan}
-          {markBetSpan}
-          <span className="points">{this.props.matchbet.points}</span>
-        </span>
+          <div className="away-team-container">
+            <span className="away-score">{awayScore}</span>
+            <span className={awayClasses}></span>
+            <span className="away-name">{this.props.matchbet.match.away_team.name}</span>
+          </div>
+        </div>
+        <div className="bet-results">
+          <div className="bet-results-score">
+            {homeBetSpan}
+            <span className="divider">-</span>
+            {awayBetSpan}
+          </div>
+          <div  className="bet-results-mark">
+            {markBetSpan}
+            <span className="points">{this.props.matchbet.points}</span>
+          </div>
+        </div>
       </div>
     );
   }

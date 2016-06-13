@@ -12,9 +12,9 @@ class MatchComponent extends Component {
   render() {
     //Classes for flags
     var home = this.props.match.home_team.short_name;
-    var homeClasses = classNames(home, 'flag');
+    var homeClasses = classNames(home, 'home-flag');
     var away = this.props.match.away_team.short_name;
-    var awayClasses = classNames(away, 'flag');
+    var awayClasses = classNames(away, 'away-flag');
 
     //Date stuff
     var date = new Date(this.props.match.time);
@@ -63,13 +63,19 @@ class MatchComponent extends Component {
         {link}
         <span className="time">{dayName} {dateFormat} {timeFormat}</span>
         <span className="group">{this.props.match.group.name}</span>
-        <span className={homeClasses}></span>
-        <span className="home-name">{this.props.match.home_team.name}</span>
-        <span className="home-score">{homeScore}</span>
-        <span className="divider">-</span>
-        <span className="away-score">{awayScore}</span>
-        <span className="away-name">{this.props.match.away_team.name}</span>
-        <span className={awayClasses}></span>
+        <div className="teams-container">
+            <div className="home-team-container">
+                <span className={homeClasses}></span>
+                <span className="home-name">{this.props.match.home_team.name}</span>
+                <span className="home-score">{homeScore}</span>
+            </div>
+            <span className="divider">-</span>
+            <div className="away-team-container">
+                <span className="away-score">{awayScore}</span>
+                <span className={awayClasses}></span>
+                <span className="away-name">{this.props.match.away_team.name}</span>
+            </div>
+        </div>
       </div>
     );
   }

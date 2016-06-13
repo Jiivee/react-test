@@ -48,7 +48,7 @@ export default AuthenticatedComponent(class Tournaments extends Component {
         <h2>Your tournaments</h2>
         {tournaments.map(function(tournament) {
           var url = '/tournaments/' + tournament._id;
-          return <div className="tournament" key={tournament._id}><Link className="tournament-link" to={url}>{tournament.name}</Link></div>;
+          return <div className="tournament-name" key={tournament._id}><Link className="tournament-link" to={url}>{tournament.name}</Link></div>;
         })}
       </div>
     );
