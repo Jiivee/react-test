@@ -305,8 +305,8 @@
       .time {
         display: block;
         background-color: $darker-base-color;
-        width: 100%;
-        padding: 2px 5px 2px 5px;
+        width: calc(100% - 5px);
+        padding: 2px 0px 2px 5px;
         color: $white-text;
       }
 
