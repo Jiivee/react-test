@@ -93,6 +93,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     var matchbets = this.state.matchbets;
     var playoffbets = this.state.playoffbets;
     var topscorerbets = this.state.topscorerbets;
+    console.log(playoffbets);
     var userName;
     var topscorerstats = '';
     if (topscorerbets.user !== undefined) {

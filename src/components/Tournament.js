@@ -181,7 +181,8 @@ export default AuthenticatedComponent(class Tournament extends Component {
             if (point.user !== null && point.user.name !== undefined && point.total_points !== 0) {
               var userId = point.user._id;
               var pointId = point._id;
-              var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+              //var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+              var urlResults = '/tournaments/' + tournamentId + '/user/' + userId + '/makebets/playoff';
               return (
                 <tr key={point._id}>
                   <td className="name-col"><span className="name-col-span"><Link to={urlResults}>{point.user.name}</Link></span></td>

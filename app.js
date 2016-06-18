@@ -55,6 +55,11 @@ app.get('/tournaments/:tournamentId/results/:userId', function(request, response
   response.sendFile(__dirname + '/dist/index.html')
 });
 
+//FIX PAGE!!!!!!!!!!!!!!!!!!!!!!
+app.get('/tournaments/:tournamentId/user/:userId/makebets/playoff', function(request, response) {
+  response.sendFile(__dirname + '/dist/index.html')
+});
+
 app.get('/newtournament', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
