@@ -143,7 +143,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
 
     var user = LoginStore.getUser();
     var adNewUser = '';
-    if (user !== null && tournament.owner !== undefined && user.email===tournament.owner.email && 1===2) {
+    if (user !== null && tournament.owner !== undefined && user.email===tournament.owner.email) {
         adNewUser = (
           <div>
             <div>Invite user:</div>
@@ -159,10 +159,10 @@ export default AuthenticatedComponent(class Tournament extends Component {
       <div className="tournament">
         <h2>{tournament.name}</h2>
 
-        {/*
+
         <div><Link to={makeBetsUrl}>Make/edit your bets</Link></div>
         <div><Link to={ownResultsUrl}>Show your bets</Link></div>
-        */}
+
         {adNewUser}
 
         <h3>Points</h3>

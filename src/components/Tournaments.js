@@ -50,6 +50,9 @@ export default AuthenticatedComponent(class Tournaments extends Component {
           var url = '/tournaments/' + tournament._id;
           return <div className="tournament-name" key={tournament._id}><Link className="tournament-link" to={url}>{tournament.name}</Link></div>;
         })}
+
+        <h3>Or create new tournament:</h3>
+        <Link className="tournament-link" to="/newtournament">Create new tournament</Link>
       </div>
     );
   }
