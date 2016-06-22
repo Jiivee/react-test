@@ -4,6 +4,7 @@ import AuthenticatedComponent from './AuthenticatedComponent.js';
 import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory, Link } from 'react-router';
+import auth from '../services/AuthService';
 
 const title = 'Tournament';
 
@@ -15,7 +16,9 @@ export default AuthenticatedComponent(class Tournament extends Component {
       tournament: {},
       points: [],
       nextbets: [],
-      lastresults: []
+      lastresults: [],
+      playoffbets: [],
+      playoffs: []
     };
   }
 
@@ -24,6 +27,52 @@ export default AuthenticatedComponent(class Tournament extends Component {
     this.fetchPoints();
     this.fetchNextBets();
     this.fetchLastResults();
+    this.fetchPlayoffbets();
+    this.fetchPlayOffs();
+  }
+
+  checkResponseStatus(response) {
+    if (response.status !== 403 || response.status !== 401) {
+      return response;
+    } else {
+      auth.logout();
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
+    }
+  }
+
+  fetchPlayOffs() {
+    fetch(Constants.PLAYOFFS_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        playoffs: data
+      });
+    })
+    .catch(e => console.log(e));
+  }
+
+  fetchPlayoffbets() {
+    var tournamentId = this.props.params.tournamentId;
+    var userId = this.props.params.userId;
+    var jwt = LoginStore.getjwt()
+    var myHeaders = new Headers({
+      'x-access-token': jwt
+    });
+    var path = Constants.PLAYOFF_BETS_URL + tournamentId;
+    fetch(path, {
+      method: 'get',
+      headers: myHeaders
+    })
+    .then(this.checkResponseStatus)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        playoffbets: data
+      });
+    })
+    .catch(e => {console.log(e)});
   }
 
   fetchLastResults() {
@@ -37,6 +86,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -57,6 +107,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -77,6 +128,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -97,6 +149,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -134,6 +187,9 @@ export default AuthenticatedComponent(class Tournament extends Component {
     var tournament = this.state.tournament;
     var nextbets = this.state.nextbets;
     var lastresults = this.state.lastresults;
+    var playoffbets = this.state.playoffbets;
+    var playoffs = this.state.playoffbets;
+    //console.log(playoffbets);
     var tournamentId = this.props.params.tournamentId;
     var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
     var points = this.state.points;
@@ -325,8 +381,6 @@ export default AuthenticatedComponent(class Tournament extends Component {
             })}
           </tbody>
         </table>
-
-
       </div>
     );
   }

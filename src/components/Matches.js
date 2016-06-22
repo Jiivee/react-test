@@ -4,6 +4,8 @@ import 'whatwg-fetch'
 import MatchComponent from './MatchComponent.js';
 import AuthenticatedComponent from './AuthenticatedComponent.js';
 import {Constants} from '../constants/Constants';
+import { browserHistory, Link } from 'react-router';
+import LoginStore from '../stores/LoginStore'
 
 const title = 'Matches';
 
@@ -32,6 +34,11 @@ export default AuthenticatedComponent(class Matches extends Component {
 
   render() {
     var matches = this.state.matches;
+    var user = LoginStore.getUser();
+    var playoffs;
+    if (user !== null && user.email==='joni.vayrynen@gmail.com') {
+        playoffs = <Link to="/playoffs/setresults">Set Knockout stage teams</Link>;
+    }
     return (
       <div className="matches">
         <h2>Matches</h2>
@@ -40,6 +47,8 @@ export default AuthenticatedComponent(class Matches extends Component {
             return <MatchComponent key={match._id} match={match} />;
           })}
         </div>
+        <h2>Playoffs</h2>
+        {playoffs}
       </div>
     );
   }

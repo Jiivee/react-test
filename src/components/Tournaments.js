@@ -4,6 +4,7 @@ import AuthenticatedComponent from './AuthenticatedComponent.js';
 import LoginStore from '../stores/LoginStore'
 import {Constants} from '../constants/Constants';
 import { browserHistory, Link } from 'react-router';
+import auth from '../services/AuthService';
 
 const title = 'Tournaments';
 
@@ -18,8 +19,16 @@ export default AuthenticatedComponent(class Tournaments extends Component {
   componentWillMount() {
     this.fetchData();
   }
-  ComponentDidMount() {
-    this.fetchData();
+
+  checkResponseStatus(response) {
+    if (response.status !== 403 || response.status !== 401) {
+      return response;
+    } else {
+      auth.logout();
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
+    }
   }
 
   fetchData() {
@@ -32,6 +41,7 @@ export default AuthenticatedComponent(class Tournaments extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({

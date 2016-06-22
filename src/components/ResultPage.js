@@ -4,7 +4,8 @@ import 'whatwg-fetch'
 import ResultComponent from './ResultComponent.js';
 import AuthenticatedComponent from './AuthenticatedComponent.js';
 import {Constants} from '../constants/Constants';
-import LoginStore from '../stores/LoginStore'
+import LoginStore from '../stores/LoginStore';
+import auth from '../services/AuthService';
 
 const title = 'Matches';
 
@@ -16,14 +17,27 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     this.state = {
       matchbets: [],
       playoffbets: [],
-      topscorerbets: {}
+      topscorerbets: {},
+      playoffs: []
     };
   }
 
   componentWillMount() {
     this.fetchMatchbets();
+    this.fetchPlayOffs();
     this.fetchPlayoffbets();
     this.fetchTopscorerbets();
+  }
+
+  checkResponseStatus(response) {
+    if (response.status !== 403 || response.status !== 401) {
+      return response;
+    } else {
+      auth.logout();
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
+    }
   }
 
   fetchTopscorerbets() {
@@ -38,6 +52,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -59,6 +74,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -80,6 +96,7 @@ export default AuthenticatedComponent(class ResultPage extends Component {
       method: 'get',
       headers: myHeaders
     })
+    .then(this.checkResponseStatus)
     .then((response) => response.json())
     .then((data) => {
       this.setState({
@@ -89,9 +106,25 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     .catch(e => {console.log(e)});
   }
 
+  fetchPlayOffs() {
+    fetch(Constants.PLAYOFFS_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        playoffs: data
+      });
+    })
+    .catch(e => console.log(e));
+  }
+
+  isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+
   render() {
     var matchbets = this.state.matchbets;
     var playoffbets = this.state.playoffbets;
+    var playoffs = this.state.playoffs;
     var topscorerbets = this.state.topscorerbets;
     var userName;
     var topscorerstats = '';
@@ -101,8 +134,8 @@ export default AuthenticatedComponent(class ResultPage extends Component {
     if (topscorerbets.player !== undefined && topscorerbets.player !== null) {
       topscorerstats = (
         <div className="result-section">
-          <div>Top scorer: {topscorerbets.goals}</div>
-          <div>Number of goals: {topscorerbets.player.name}</div>
+          <div>Top scorer: {topscorerbets.player.name}</div>
+          <div>Number of goals: {topscorerbets.goals}</div>
         </div>
       );
     }
@@ -125,17 +158,27 @@ export default AuthenticatedComponent(class ResultPage extends Component {
         </div>
         <h3>Knockout stage</h3>
         <div className="result-section">
-          {playoffbets.map(function(playoffbet) {
+          {playoffbets.map(function(playoffbet, index) {
             var teams = playoffbet.teams;
-            var numberTeams = teams.length;
+            var rightTeams = playoffs[index].teams;
             return (
-              <div key={playoffbet._id}>
-                <div className="playoff-section">Round of {playoffbet.round_of}, selected teams: {numberTeams}</div>
+              <div className="playoff-section" key={playoffbet._id}>
+                <div>Round of {playoffbet.round_of}</div>
                 {teams.map(function(team) {
+                  var teamSpan;
+                  if (this.isInArray(team._id, rightTeams)) {
+                    teamSpan = <span className="playoff-bet-result-right" key={team._id}>{team.short_name}</span>;
+                  }
+                  else if (rightTeams.length === playoffbet.round_of) {
+                    teamSpan = <span className="playoff-bet-result-wrong" key={team._id}>{team.short_name}</span>;
+                  }
+                  else {
+                    teamSpan = <span className="playoff-bet-result" key={team._id}>{team.short_name}</span>;
+                  }
                   return (
-                    <span key={team._id}>{team.name} </span>
+                    teamSpan
                   );
-                })}
+                }, this)}
               </div>
             );
           }, this)}

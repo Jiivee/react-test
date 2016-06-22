@@ -1,5 +1,5 @@
 var BASE_URL = 'https://betbackend.herokuapp.com/';
-//var BASE_URL = 'http://localhost:3002/';
+var BASE_URL = 'http://localhost:3002/';
 export const Constants = {
   BASE_URL: BASE_URL,
   LOGIN_URL: BASE_URL + 'authenticate/',
@@ -8,6 +8,7 @@ export const Constants = {
   TEAMS_URL: BASE_URL + 'teams/',
   GROUPS_URL: BASE_URL + 'groups/',
   MATCHES_URL: BASE_URL + 'matches/',
+  PLAYOFFS_URL: BASE_URL + 'playoffs/',
   MATCH_BETS_URL: BASE_URL + 'matchbets/',
   PLAYOFF_BETS_URL: BASE_URL + 'playoffbets/',
   TOPSCORER_BETS_URL: BASE_URL + 'topscorerbets/',

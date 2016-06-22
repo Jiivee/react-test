@@ -131,3 +131,67 @@ ul {
 }
 
 
+.result-section {
+
+
+  .playoff-section {
+    max-width: 510px;
+  }
+
+  .playoff-bet-result {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($unselect-color, 15%);
+    background-color: $unselect-color;
+    border: 1px solid darken($unselect-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 3px 6px 3px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 25px;
+    width: 50px;
+    padding-top: 3px;
+  }
+
+  .playoff-bet-result-right {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($select-color, 15%);
+    background-color: $select-color;
+    border:1px solid darken($select-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 3px 6px 3px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 25px;
+    width: 50px;
+    padding-top: 3px;
+  }
+
+  .playoff-bet-result-wrong {
+    -moz-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    -webkit-box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    box-shadow:inset 1px 1px 0px 0px lighten($wrong-color, 15%);
+    background-color: $wrong-color;
+    border:1px solid darken($wrong-color, 15%);
+    display:inline-block;
+    text-align: center;
+    margin: 3px 6px 3px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 25px;
+    width: 50px;
+    padding-top: 3px;
+  }
+}
+
+
+

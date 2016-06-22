@@ -8,6 +8,7 @@ import Tournament from './components/Tournament'
 import NewTournament from './components/NewTournament'
 import MatchBet from './components/MatchBet'
 import PlayoffBet from './components/PlayoffBet'
+import SetPlayoffResult from './components/SetPlayoffResult'
 import TopScorerBet from './components/TopScorerBet'
 import SetMatchResult from './components/SetMatchResult'
 import ResultPage from './components/ResultPage'
@@ -32,12 +33,27 @@ function requireAuth(nextState, replace) {
   }
 }
 
+function requireAdmin(nextState, replace) {
+  let jwt = localStorage.getItem('jwt');
+  if (jwt) {
+    LoginActions.loginUser(jwt);
+  }
+  const user = LoginStore.getUser();
+  if (user.email !== 'joni.vayrynen@gmail.com') {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
 render((
   <Router history={browserHistory}>
     <Route component={App}>
       <Route path="/" component={Matches}/>
       <Route path="/rules" component={Rules}/>
-      <Route path="matches/:matchId/setresult" component={SetMatchResult} onEnter={requireAuth}/>
+      <Route path="matches/:matchId/setresult" component={SetMatchResult} onEnter={requireAdmin}/>
+      <Route path="playoffs/setresults" component={SetPlayoffResult} onEnter={requireAdmin}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId/makebets/match" component={MatchBet} onEnter={requireAuth}/>
