@@ -183,19 +183,25 @@ export default AuthenticatedComponent(class Tournament extends Component {
     });
   }
 
+  isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+
   render() {
     var tournament = this.state.tournament;
     var nextbets = this.state.nextbets;
     var lastresults = this.state.lastresults;
     var playoffbets = this.state.playoffbets;
-    var playoffs = this.state.playoffbets;
-    //console.log(playoffbets);
+    var playoffs = this.state.playoffs;
     var tournamentId = this.props.params.tournamentId;
     var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
     var points = this.state.points;
     var userId = LoginStore.getUserId();
     var ownResultsUrl = '/tournaments/' + tournamentId + '/results/' + userId;
     var userEmail = LoginStore.getUser().email;
+
+    var numberOfUser = playoffbets.length/5;
+    var roundsIter = [0,1,2,3,4];
 
     var user = LoginStore.getUser();
     var adNewUser = '';
@@ -251,6 +257,9 @@ export default AuthenticatedComponent(class Tournament extends Component {
           })}
           </tbody>
         </table>
+
+        {/*
+        DONT SHOW UPCOMING MATHCES OR LATEST RESULTS ON KNOCKOUT STAGE
         <h3>Bets of the next matches</h3>
         <table>
           {nextbets.slice(0,1).map(function(nextbet) {
@@ -381,6 +390,71 @@ export default AuthenticatedComponent(class Tournament extends Component {
             })}
           </tbody>
         </table>
+        DONT SHOW UPCOMING MATHCES OR LATEST RESULTS ON KNOCKOUT STAGE
+        */}
+
+        <h3>Knockout stage bets</h3>
+        {roundsIter.map(function(iter) {
+          var headline;
+          if (iter === 0) {
+            headline = 'Round of 16';
+          }
+          else if (iter === 1) {
+            headline = 'Quarter-finals';
+          }
+          else if (iter === 2) {
+            headline = 'Semi-finals';
+          }
+          else if (iter === 3) {
+            headline = 'Final';
+          }
+          else if (iter === 4) {
+            headline = 'Winner';
+          }
+          return (
+            <table key={iter}>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td className="playoffbet-col">{headline}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {playoffbets.slice(numberOfUser*iter, numberOfUser*(iter+1)).map(function(playoffbet, index) {
+                  var playoffbetTeams = playoffbet.teams;
+                  var rightTeams = playoffs[iter].teams;
+                  if (playoffbet.user !== null && playoffbet.user.name !== undefined && playoffbet.teams.length !== 0) {
+                    var playoffKey = playoffbet.user._id + iter;
+                    return (
+                      <tr key={playoffKey}>
+                        <td>{playoffbet.user.name}</td>
+                        <td className="playoffbet-col">
+                          {playoffbetTeams.map(function(team) {
+                            var teamSpan;
+                            if (this.isInArray(team._id, rightTeams)) {
+                              teamSpan = <span className="playoff-bet-result-right" key={team._id}>{team.short_name}</span>;
+                            }
+                            else if (rightTeams.length === playoffbet.round_of) {
+                              teamSpan = <span className="playoff-bet-result-wrong" key={team._id}>{team.short_name}</span>;
+                            }
+                            else {
+                              teamSpan = <span className="playoff-bet-result" key={team._id}>{team.short_name}</span>;
+                            }
+                            return (
+                              teamSpan
+                            );
+                          }, this)}
+                        </td>
+                      </tr>
+                    );
+                  }
+                }, this)}
+              </tbody>
+            </table>
+          );
+        }, this)}
+
+
       </div>
     );
   }
