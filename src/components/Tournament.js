@@ -18,7 +18,8 @@ export default AuthenticatedComponent(class Tournament extends Component {
       nextbets: [],
       lastresults: [],
       playoffbets: [],
-      playoffs: []
+      playoffs: [],
+      topscorerbets: []
     };
   }
 
@@ -29,6 +30,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
     this.fetchLastResults();
     this.fetchPlayoffbets();
     this.fetchPlayOffs();
+    this.fetchTopscorerbets();
   }
 
   checkResponseStatus(response) {
@@ -51,6 +53,28 @@ export default AuthenticatedComponent(class Tournament extends Component {
       });
     })
     .catch(e => console.log(e));
+  }
+
+  fetchTopscorerbets() {
+    var tournamentId = this.props.params.tournamentId;
+    var userId = this.props.params.userId;
+    var jwt = LoginStore.getjwt()
+    var myHeaders = new Headers({
+      'x-access-token': jwt
+    });
+    var path = Constants.TOPSCORER_BETS_URL + tournamentId;
+    fetch(path, {
+      method: 'get',
+      headers: myHeaders
+    })
+    .then(this.checkResponseStatus)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        topscorerbets: data
+      });
+    })
+    .catch(e => {console.log(e)});
   }
 
   fetchPlayoffbets() {
@@ -193,6 +217,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
     var lastresults = this.state.lastresults;
     var playoffbets = this.state.playoffbets;
     var playoffs = this.state.playoffs;
+    var topscorerbets = this.state.topscorerbets;
     var tournamentId = this.props.params.tournamentId;
     var makeBetsUrl = '/tournaments/' + tournamentId + '/makebets/match';
     var points = this.state.points;
@@ -317,7 +342,7 @@ export default AuthenticatedComponent(class Tournament extends Component {
             return (
               <thead key="bet-header">
                 <tr>
-                  <td  className="name-col">Name</td>
+                  <td className="name-col">Name</td>
                   {nextbet.map(function(bet, index) {
                     var key = bet._id + '-head';
                     var match = bet.match;
@@ -412,10 +437,10 @@ export default AuthenticatedComponent(class Tournament extends Component {
             headline = 'Winner';
           }
           return (
-            <table key={iter}>
+            <table className="playoff-table" key={iter}>
               <thead>
                 <tr>
-                  <td>Name</td>
+                  <td className="name-col">Name</td>
                   <td className="playoffbet-col">{headline}</td>
                 </tr>
               </thead>
@@ -425,9 +450,11 @@ export default AuthenticatedComponent(class Tournament extends Component {
                   var rightTeams = playoffs[iter].teams;
                   if (playoffbet.user !== null && playoffbet.user.name !== undefined && playoffbet.teams.length !== 0) {
                     var playoffKey = playoffbet.user._id + iter;
+                    var userId = playoffbet.user._id;
+                    var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
                     return (
                       <tr key={playoffKey}>
-                        <td>{playoffbet.user.name}</td>
+                        <td className="name-col"><Link to={urlResults}>{playoffbet.user.name}</Link></td>
                         <td className="playoffbet-col">
                           {playoffbetTeams.map(function(team) {
                             var teamSpan;
@@ -454,7 +481,32 @@ export default AuthenticatedComponent(class Tournament extends Component {
           );
         }, this)}
 
-
+        <h3>Top Scorer bets</h3>
+        <table>
+          <thead>
+            <tr>
+              <td className="name-col">Name</td>
+              <td className="">Player</td>
+              <td className="">Number of Goals</td>
+            </tr>
+          </thead>
+          <tbody>
+            {topscorerbets.map(function(topscorerbet) {
+              if (topscorerbet.user !== null && topscorerbet.user.name !== undefined && topscorerbet.player !== null) {
+                var userId = topscorerbet.user._id;
+                var urlResults = '/tournaments/' + tournamentId + '/results/' + userId;
+                var key = topscorerbet._id + userId;
+                return (
+                  <tr key={key}>
+                    <td className="name-col"><Link to={urlResults}>{topscorerbet.user.name}</Link></td>
+                    <td className="">{topscorerbet.player.name}</td>
+                    <td className="">{topscorerbet.goals}</td>
+                  </tr>
+                );
+              }
+            }, this)}
+          </tbody>
+        </table>
       </div>
     );
   }

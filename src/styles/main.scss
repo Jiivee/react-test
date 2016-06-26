@@ -131,9 +131,6 @@ ul {
 }
 
 
-
-
-
 .playoff-section {
   max-width: 510px;
 }
@@ -193,3 +190,37 @@ ul {
 }
 
 
+@media only screen and (max-width: 767px) {
+
+  .playoff-table {
+    td {
+      padding: 2px;
+    }
+  }
+
+  .playoff-bet-result {
+    margin: 2px 4px 2px 0;
+    height: 19px;
+    width: 45px;
+    padding-top: 2px;
+    font-size: 13px;
+  }
+
+  .playoff-bet-result-right {
+    margin: 2px 4px 2px 0;
+    height: 19px;
+    width: 45px;
+    padding-top: 2px;
+    font-size: 13px;
+  }
+
+  .playoff-bet-result-wrong {
+    margin: 2px 4px 2px 0;
+    height: 19px;
+    width: 45px;
+    padding-top: 2px;
+    font-size: 13px;
+  }
+
+
+}
