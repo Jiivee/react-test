@@ -10,6 +10,7 @@ import MatchBet from './components/MatchBet'
 import PlayoffBet from './components/PlayoffBet'
 import SetPlayoffResult from './components/SetPlayoffResult'
 import TopScorerBet from './components/TopScorerBet'
+import SetTopScorerResult from './components/SetTopScorerResult'
 import SetMatchResult from './components/SetMatchResult'
 import ResultPage from './components/ResultPage'
 import NewUser from './components/NewUser'
@@ -54,6 +55,7 @@ render((
       <Route path="/rules" component={Rules}/>
       <Route path="matches/:matchId/setresult" component={SetMatchResult} onEnter={requireAdmin}/>
       <Route path="playoffs/setresults" component={SetPlayoffResult} onEnter={requireAdmin}/>
+      <Route path="topscorer/setresults" component={SetTopScorerResult} onEnter={requireAdmin}/>
       <Route path="tournaments" component={Tournaments} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId" component={Tournament} onEnter={requireAuth}/>
       <Route path="tournaments/:tournamentId/makebets/match" component={MatchBet} onEnter={requireAuth}/>

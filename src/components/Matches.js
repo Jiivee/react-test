@@ -35,9 +35,12 @@ export default AuthenticatedComponent(class Matches extends Component {
   render() {
     var matches = this.state.matches;
     var user = LoginStore.getUser();
-    var playoffs;
+    var playoffs, topscorer;
     if (user !== null && user.email==='joni.vayrynen@gmail.com') {
         playoffs = <Link to="/playoffs/setresults">Set Knockout stage teams</Link>;
+    }
+    if (user !== null && user.email==='joni.vayrynen@gmail.com') {
+        topscorer = <Link to="/topscorer/setresults">Set top scorer</Link>;
     }
     return (
       <div className="matches">
@@ -47,8 +50,8 @@ export default AuthenticatedComponent(class Matches extends Component {
             return <MatchComponent key={match._id} match={match} />;
           })}
         </div>
-        <h2>Playoffs</h2>
-        {playoffs}
+        <div>{playoffs}</div>
+        <div>{topscorer}</div>
       </div>
     );
   }

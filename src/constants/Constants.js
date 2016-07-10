@@ -12,6 +12,7 @@ export const Constants = {
   MATCH_BETS_URL: BASE_URL + 'matchbets/',
   PLAYOFF_BETS_URL: BASE_URL + 'playoffbets/',
   TOPSCORER_BETS_URL: BASE_URL + 'topscorerbets/',
+  TOPSCORER_URL: BASE_URL + 'topscorer/',
   SAVE_RESULTS_URL: BASE_URL + 'saveresults/',
   POINTS_URL: BASE_URL + 'points/',
   TOURNAMENTS_URL: BASE_URL + 'tournaments/',
